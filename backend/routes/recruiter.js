@@ -14,5 +14,6 @@ router.get('/referrals', hasRole('recruiter', 'admin'), recruiterController.getR
 
 // POST /outcome - submit referral outcome
 router.post('/outcome', hasRole('recruiter', 'admin'), recruiterController.submitOutcome);
+router.post('/outcomes', hasRole('recruiter', 'admin'), recruiterController.submitOutcome);
 
 module.exports = router;

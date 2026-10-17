@@ -63,7 +63,12 @@ const getDashboard = async (req, res) => {
           candidatesWithDetails.push(cData);
         }
 
+        refData.candidates = candidatesWithDetails;
         refData.rankedCandidates = candidatesWithDetails;
+        const selectedCount = candidatesWithDetails.filter(
+          (c) => c.status === 'referred' || c.status === 'selected'
+        ).length;
+        refData.slotsRemaining = Math.max(0, refData.slots - selectedCount);
       }
 
       enrichedReferrals.push(refData);

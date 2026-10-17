@@ -42,13 +42,22 @@ const getReferrals = async (req, res) => {
     for (const ref of referrals) {
       const refData = ref.toJSON ? ref.toJSON() : { ...ref };
 
+      // Include alumnus sponsor details
+      if (ref.alumnusId) {
+        const alumnus = await User.findByPk(ref.alumnusId, {
+          attributes: ['id', 'name', 'email']
+        });
+        refData.alumnus = alumnus ? (alumnus.toJSON ? alumnus.toJSON() : alumnus) : null;
+      }
+
       // Include candidates referred for this referral
       if (ReferralCandidate) {
         const referredCandidates = await ReferralCandidate.findAll({
           where: {
             referralId: ref.id,
-            status: 'referred'
-          }
+          },
+          order: [['rank', 'ASC']],
+          limit: 5,
         });
 
         const candidatesWithDetails = [];
@@ -70,10 +79,19 @@ const getReferrals = async (req, res) => {
 
           cData.user = candidateUser;
           cData.profile = candidateProfile;
+          cData.candidate = candidateUser
+            ? {
+                id: candidateUser.id,
+                name: candidateUser.name,
+                email: candidateUser.email,
+                profile: candidateProfile,
+              }
+            : null;
           cData.techScores = candidateScores;
           candidatesWithDetails.push(cData);
         }
 
+        refData.candidates = candidatesWithDetails;
         refData.referredCandidates = candidatesWithDetails;
       }
 
