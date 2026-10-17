@@ -6,7 +6,7 @@ import Navbar from '../components/Navbar';
 import DisclaimerBanner from '../components/DisclaimerBanner';
 
 export const LoginPage: React.FC = () => {
-  const { user, login } = useAuth();
+  const { user, login, demoLogin } = useAuth();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -73,6 +73,46 @@ export const LoginPage: React.FC = () => {
                 <span>Continue with Google</span>
                 <ArrowRight className="w-4 h-4 text-slate-400 group-hover:translate-x-1 transition-transform ml-auto" />
               </button>
+
+              <div className="relative py-2">
+                <div className="absolute inset-0 flex items-center">
+                  <div className="w-full border-t border-slate-200"></div>
+                </div>
+                <div className="relative flex justify-center text-xs uppercase">
+                  <span className="bg-white px-2 text-slate-400 font-semibold">Or 1-Click Demo Evaluation</span>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-2 gap-2">
+                <button
+                  type="button"
+                  onClick={() => demoLogin('student')}
+                  className="px-3 py-2 bg-indigo-50 hover:bg-indigo-100 text-indigo-700 rounded-lg text-xs font-semibold border border-indigo-200 transition text-left"
+                >
+                  🎓 Demo Student
+                </button>
+                <button
+                  type="button"
+                  onClick={() => demoLogin('alumni')}
+                  className="px-3 py-2 bg-emerald-50 hover:bg-emerald-100 text-emerald-700 rounded-lg text-xs font-semibold border border-emerald-200 transition text-left"
+                >
+                  🤝 Demo Alumni
+                </button>
+                <button
+                  type="button"
+                  onClick={() => demoLogin('recruiter')}
+                  className="px-3 py-2 bg-amber-50 hover:bg-amber-100 text-amber-700 rounded-lg text-xs font-semibold border border-amber-200 transition text-left"
+                >
+                  💼 Demo Recruiter
+                </button>
+                <button
+                  type="button"
+                  onClick={() => demoLogin('admin')}
+                  className="px-3 py-2 bg-purple-50 hover:bg-purple-100 text-purple-700 rounded-lg text-xs font-semibold border border-purple-200 transition text-left"
+                >
+                  🛡️ Demo Admin
+                </button>
+              </div>
             </div>
 
             {/* Crucial Institutional Requirement Notes */}
