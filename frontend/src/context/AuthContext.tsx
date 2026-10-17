@@ -6,6 +6,7 @@ interface AuthContextType {
   user: User | null;
   loading: boolean;
   login: () => void;
+  demoLogin: (role: string) => Promise<void>;
   logout: () => Promise<void>;
   selectRole: (role: string) => Promise<void>;
   refreshUser: () => Promise<void>;
@@ -15,6 +16,7 @@ export const AuthContext = createContext<AuthContextType>({
   user: null,
   loading: true,
   login: () => {},
+  demoLogin: async () => {},
   logout: async () => {},
   selectRole: async () => {},
   refreshUser: async () => {},
@@ -53,6 +55,20 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     window.location.href = '/api/auth/google';
   };
 
+  const demoLogin = async (role: string) => {
+    try {
+      setLoading(true);
+      const res = await api.post('/auth/demo-login', { role });
+      if (res.data && res.data.user) {
+        setUser(res.data.user);
+      } else {
+        await refreshUser();
+      }
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const logout = async () => {
     try {
       await api.post('/auth/logout');
@@ -89,6 +105,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         user,
         loading,
         login,
+        demoLogin,
         logout,
         selectRole,
         refreshUser,
