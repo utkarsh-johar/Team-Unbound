@@ -482,6 +482,104 @@ async function seed() {
     outcomeReason: 'Candidate successfully passed coding evaluation and culture interview. Offer accepted.',
   });
 
+  // Referral 3: Google (Open)
+  const referral3 = await Referral.create({
+    alumnusId: alumni1.id,
+    institutionId: demoUniv.id,
+    company: 'Google',
+    roleTitle: 'Software Engineer - Web Platforms',
+    requiredTechnologies: ['React', 'JavaScript', 'TypeScript'],
+    slots: 3,
+    description:
+      'Core Frontend Infrastructure team at Google. Building ultra-low latency interfaces, component engines, and developer design kits.',
+    expiresAt: new Date(Date.now() + 6 * 24 * 60 * 60 * 1000),
+    status: 'open',
+    openToOtherColleges: true,
+    recruiterEmail: 'recruiter@company.com',
+    outcome: 'pending',
+    outcomeReason: null,
+  });
+
+  await ReferralCandidate.bulkCreate([
+    {
+      referralId: referral3.id,
+      candidateId: student2.id,
+      rank: 1,
+      matchScore: 94.2,
+      codeDnaScore: 95.0,
+      sandboxScore: 89.0,
+      fitScore: 98.0,
+      status: 'ranked',
+    },
+    {
+      referralId: referral3.id,
+      candidateId: student1.id,
+      rank: 2,
+      matchScore: 87.8,
+      codeDnaScore: 88.0,
+      sandboxScore: 85.0,
+      fitScore: 91.0,
+      status: 'ranked',
+    },
+  ]);
+
+  await RecruiterInvite.create({
+    referralId: referral3.id,
+    email: 'recruiter@company.com',
+    token: 'demo_token_google_invite_002',
+    expiresAt: new Date(Date.now() + oneWeekInMs),
+    accepted: false,
+  });
+
+  // Referral 4: Stripe (Open)
+  const referral4 = await Referral.create({
+    alumnusId: alumni1.id,
+    institutionId: demoUniv.id,
+    company: 'Stripe',
+    roleTitle: 'Payments Backend Engineer',
+    requiredTechnologies: ['Node.js', 'PostgreSQL', 'JavaScript'],
+    slots: 2,
+    description:
+      'Payments Ledger Infrastructure at Stripe. Focusing on idempotency, transaction isolation, and high-reliability event pipelines.',
+    expiresAt: new Date(Date.now() + 5 * 24 * 60 * 60 * 1000),
+    status: 'open',
+    openToOtherColleges: true,
+    recruiterEmail: 'recruiter@company.com',
+    outcome: 'pending',
+    outcomeReason: null,
+  });
+
+  await ReferralCandidate.bulkCreate([
+    {
+      referralId: referral4.id,
+      candidateId: student1.id,
+      rank: 1,
+      matchScore: 89.4,
+      codeDnaScore: 91.0,
+      sandboxScore: 86.0,
+      fitScore: 92.0,
+      status: 'ranked',
+    },
+    {
+      referralId: referral4.id,
+      candidateId: student3.id,
+      rank: 2,
+      matchScore: 82.1,
+      codeDnaScore: 83.0,
+      sandboxScore: 80.0,
+      fitScore: 84.0,
+      status: 'ranked',
+    },
+  ]);
+
+  await RecruiterInvite.create({
+    referralId: referral4.id,
+    email: 'recruiter@company.com',
+    token: 'demo_token_stripe_invite_003',
+    expiresAt: new Date(Date.now() + oneWeekInMs),
+    accepted: false,
+  });
+
   // Referred candidate for Referral 2
   const referral2Candidate = await ReferralCandidate.create({
     referralId: referral2.id,
