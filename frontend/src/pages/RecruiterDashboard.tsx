@@ -65,7 +65,7 @@ export const RecruiterDashboard: React.FC = () => {
     setSubmittingId(key);
     setStatusMessage(null);
     try {
-      await api.post(`/recruiter/outcomes`, {
+      await api.post(`/recruiter/outcome`, {
         referralId,
         candidateId,
         outcome,

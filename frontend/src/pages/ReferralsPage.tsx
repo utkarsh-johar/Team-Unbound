@@ -29,10 +29,16 @@ export const ReferralsPage: React.FC = () => {
   }, [fetchReferrals, isAlumni, statusFilter]);
 
   const filteredReferrals = referrals.filter((ref) => {
+    const techs = Array.isArray(ref.requiredTechnologies)
+      ? ref.requiredTechnologies
+      : typeof ref.requiredTechnologies === 'string'
+      ? (ref.requiredTechnologies as string).split(',')
+      : [];
+
     const matchesSearch =
       ref.company.toLowerCase().includes(searchTerm.toLowerCase()) ||
       ref.roleTitle.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      ref.requiredTechnologies.some((t) => t.toLowerCase().includes(searchTerm.toLowerCase()));
+      techs.some((t) => t.toLowerCase().includes(searchTerm.toLowerCase()));
 
     const isExpired = new Date(ref.expiresAt).getTime() < Date.now() || ref.status === 'expired';
 

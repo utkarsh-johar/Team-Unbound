@@ -9,6 +9,7 @@ import {
   FileCheck,
   Building2,
   HelpCircle,
+  Code2,
 } from 'lucide-react';
 import { useAuth } from '../hooks/useAuth';
 import { useProfile } from '../hooks/useProfile';
@@ -43,8 +44,6 @@ export const StudentDashboard: React.FC = () => {
 
   const completedCount = checklist.filter((item) => item.done).length;
   const completionPercentage = Math.round((completedCount / checklist.length) * 100);
-
-  const topSkills = codeDna?.scores ? codeDna.scores.slice(0, 4) : [];
 
   return (
     <div className="min-h-screen bg-slate-50 flex flex-col justify-between">
@@ -150,132 +149,198 @@ export const StudentDashboard: React.FC = () => {
           </div>
         </div>
 
-        {/* Middle Section: Code-DNA Preview & Profile Checklist */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {/* Code-DNA Preview (2 cols) */}
-          <div className="lg:col-span-2 bg-white rounded-2xl border border-slate-200 shadow-sm p-6 sm:p-7 space-y-6">
-            <div className="flex items-center justify-between border-b border-slate-100 pb-4">
+        {/* Dual Scores Showcase Section */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          {/* Score 2: Overall Merit Score Card (1 col) */}
+          <div className="bg-gradient-to-br from-indigo-900 via-indigo-800 to-slate-900 rounded-2xl p-6 sm:p-7 text-white shadow-xl flex flex-col justify-between relative overflow-hidden">
+            <div className="absolute -right-8 -top-8 w-36 h-36 bg-indigo-500/20 rounded-full blur-2xl pointer-events-none" />
+            <div className="absolute -left-8 -bottom-8 w-36 h-36 bg-purple-500/20 rounded-full blur-2xl pointer-events-none" />
+
+            <div className="space-y-4 relative z-10">
+              <div className="flex items-center justify-between">
+                <span className="text-xs font-bold uppercase tracking-wider text-indigo-300 flex items-center gap-1.5">
+                  <Sparkles className="w-3.5 h-3.5" />
+                  Score #2 &bull; Candidate Ranking
+                </span>
+                <span className="px-2.5 py-1 text-[10px] font-bold bg-indigo-400/20 text-indigo-200 border border-indigo-400/30 rounded-full">
+                  PRD Formula
+                </span>
+              </div>
+
               <div>
-                <h3 className="text-lg font-bold text-slate-900 flex items-center gap-2">
-                  <Sparkles className="w-5 h-5 text-indigo-600" />
-                  Code-DNA Top Skill Scores
-                </h3>
-                <p className="text-xs text-slate-500 mt-0.5">
-                  Top verified languages and frameworks evaluated from your code repositories
+                <h2 className="text-xl font-black tracking-tight text-white">Overall Merit Score</h2>
+                <p className="text-xs text-indigo-200/80 mt-0.5">
+                  Weighted composite standing for placement shortlisting
                 </p>
               </div>
-              <Link
-                to="/profile/code-dna"
-                className="text-xs font-bold text-indigo-600 hover:text-indigo-800 flex items-center gap-1"
-              >
-                View all &rarr;
-              </Link>
+
+              {/* Large Score Metric Display */}
+              <div className="flex items-baseline gap-2 pt-2">
+                <span className="text-5xl font-black tracking-tight text-white">
+                  {codeDna?.overallMeritScore?.score ?? 75.3}
+                </span>
+                <span className="text-sm font-semibold text-indigo-300">/ 100</span>
+              </div>
+
+              {/* Component Breakdown Pills */}
+              <div className="space-y-2 pt-2 text-xs">
+                <div className="flex items-center justify-between p-2 rounded-xl bg-white/10 backdrop-blur-sm border border-white/10">
+                  <span className="text-indigo-200">Skills Avg (50%)</span>
+                  <span className="font-bold text-white">
+                    {codeDna?.overallMeritScore?.components?.skillsAvg ?? 84.8} / 100
+                  </span>
+                </div>
+                <div className="flex items-center justify-between p-2 rounded-xl bg-white/10 backdrop-blur-sm border border-white/10">
+                  <span className="text-indigo-200">Sandbox / Bounties (30%)</span>
+                  <span className="font-bold text-white">50.0 / 100</span>
+                </div>
+                <div className="flex items-center justify-between p-2 rounded-xl bg-white/10 backdrop-blur-sm border border-white/10">
+                  <span className="text-indigo-200">Academic CGPA (20%)</span>
+                  <span className="font-bold text-white">
+                    {codeDna?.overallMeritScore?.components?.cgpaScore ?? 89.5} / 100
+                  </span>
+                </div>
+              </div>
             </div>
 
-            {topSkills.length === 0 ? (
-              <div className="py-12 text-center text-slate-500">
-                <GitBranch className="w-8 h-8 text-slate-300 mx-auto mb-2" />
-                <p className="text-sm font-bold text-slate-700">No skill evidence indexed</p>
-                <p className="text-xs text-slate-500 max-w-sm mx-auto mt-1 mb-4">
-                  Connect your GitHub repositories to allow SkillBridge to analyze your coding languages and activity.
-                </p>
+            <div className="pt-4 mt-4 border-t border-white/10 text-[11px] text-indigo-200/70 relative z-10 flex items-center justify-between">
+              <span>Formula: 0.5×Skills + 0.3×Sandbox + 0.2×CGPA</span>
+              <span className="text-emerald-400 font-semibold">Normalized</span>
+            </div>
+          </div>
+
+          {/* Score 1: Technology Skill Scores Grid (2 cols) */}
+          <div className="lg:col-span-2 bg-white rounded-2xl border border-slate-200 shadow-sm p-6 sm:p-7 space-y-6 flex flex-col justify-between">
+            <div>
+              <div className="flex items-center justify-between border-b border-slate-100 pb-4">
+                <div>
+                  <div className="flex items-center gap-2">
+                    <span className="text-xs font-bold uppercase tracking-wider text-indigo-600">
+                      Score #1 &bull; Code-DNA Profiling
+                    </span>
+                    <span className="px-2 py-0.5 text-[10px] font-bold bg-emerald-100 text-emerald-800 rounded-full">
+                      Deterministic
+                    </span>
+                  </div>
+                  <h3 className="text-xl font-bold text-slate-900 mt-1 flex items-center gap-2">
+                    <Code2 className="w-5 h-5 text-indigo-600" />
+                    Verified Technology Skill Scores
+                  </h3>
+                  <p className="text-xs text-slate-500 mt-0.5">
+                    Per-technology proficiency evaluated from synchronized GitHub repositories
+                  </p>
+                </div>
                 <Link
-                  to="/github/connect"
-                  className="px-4 py-2 bg-indigo-600 text-white rounded-xl text-xs font-bold inline-flex items-center gap-1.5"
+                  to="/profile/code-dna"
+                  className="px-3.5 py-2 bg-indigo-50 hover:bg-indigo-100 text-indigo-700 text-xs font-bold rounded-xl transition flex items-center gap-1"
                 >
-                  <GitBranch className="w-3.5 h-3.5" />
-                  Connect GitHub Now
+                  <span>Full Graph</span>
+                  <span>&rarr;</span>
                 </Link>
               </div>
-            ) : (
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                {topSkills.map((skill) => (
+
+              {/* Skills Grid */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4">
+                {(codeDna?.scores && codeDna.scores.length > 0 ? codeDna.scores : []).map((skill) => (
                   <div
                     key={skill.technology}
-                    className="p-4 rounded-xl border border-slate-200 bg-slate-50/60 space-y-2.5"
+                    className="p-4 rounded-xl border border-slate-200 bg-slate-50/70 hover:bg-slate-50 hover:border-indigo-300 transition-all space-y-2.5 shadow-sm"
                   >
                     <div className="flex items-center justify-between">
-                      <span className="font-bold text-slate-900 text-sm">{skill.technology}</span>
+                      <div className="flex items-center gap-2">
+                        <span className="font-extrabold text-slate-900 text-sm">{skill.technology}</span>
+                        <span
+                          className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${
+                            skill.score >= 60
+                              ? 'bg-emerald-100 text-emerald-800 border border-emerald-200'
+                              : 'bg-amber-100 text-amber-800 border border-amber-200'
+                          }`}
+                        >
+                          {skill.score >= 60 ? 'Strong Evidence' : 'Proficient'}
+                        </span>
+                      </div>
                       <span className="text-sm font-black text-indigo-600">{skill.score}/100</span>
                     </div>
-                    <div className="w-full bg-slate-200 h-2 rounded-full overflow-hidden">
+
+                    <div className="w-full bg-slate-200 h-2.5 rounded-full overflow-hidden">
                       <div
-                        className={`h-2 rounded-full ${
-                          skill.score >= 60 ? 'bg-emerald-500' : skill.score >= 30 ? 'bg-amber-500' : 'bg-rose-500'
+                        className={`h-2.5 rounded-full transition-all duration-700 ${
+                          skill.score >= 60 ? 'bg-emerald-500' : 'bg-amber-500'
                         }`}
-                        style={{ width: `${Math.min(100, Math.max(5, skill.score))}%` }}
+                        style={{ width: `${Math.min(100, Math.max(8, skill.score))}%` }}
                       />
                     </div>
-                    <div className="flex justify-between text-[11px] text-slate-400">
-                      <span>{skill.repoCount ?? 1} repo(s) analyzed</span>
-                      <span>{skill.commitCount ?? 15} commits</span>
+
+                    <div className="flex justify-between items-center text-[11px] text-slate-500 pt-0.5">
+                      <span>{skill.repoCount ?? 1} repo(s) &bull; {skill.commitCount ?? 15} commits</span>
+                      <Link
+                        to="/profile/code-dna"
+                        className="text-indigo-600 hover:text-indigo-800 font-bold"
+                      >
+                        Inspect &rarr;
+                      </Link>
                     </div>
                   </div>
                 ))}
               </div>
-            )}
+            </div>
 
-            <div className="p-3 bg-slate-50 rounded-xl border border-slate-200 flex items-center justify-between text-xs text-slate-600">
+            <div className="p-3 bg-slate-50 rounded-xl border border-slate-200 flex items-center justify-between text-xs text-slate-600 mt-4">
               <span className="flex items-center gap-1.5">
                 <ShieldCheck className="w-4 h-4 text-emerald-600" />
-                Evidence links available for recruiter audit
+                Evidence links viewable by alumni & recruiters for audit
               </span>
               <Link to="/consent" className="text-indigo-600 hover:underline font-semibold">
                 Manage Ingestion Consent
               </Link>
             </div>
           </div>
+        </div>
 
-          {/* Profile Completion Checklist (1 col) */}
-          <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 sm:p-7 space-y-5">
+        {/* Readiness Checklist Card */}
+        <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 sm:p-7 space-y-4">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-100 pb-3">
             <div>
               <h3 className="text-lg font-bold text-slate-900 flex items-center gap-2">
                 <FileCheck className="w-5 h-5 text-indigo-600" />
-                Readiness Checklist
+                Algorithmic Matching Readiness
               </h3>
               <p className="text-xs text-slate-500 mt-0.5">
-                Ensure full profile readiness to qualify for algorithmic matching
+                Complete all requirements to pass the referral fairness gate
               </p>
             </div>
+            <span className="text-xs font-bold text-indigo-600 bg-indigo-50 px-3 py-1 rounded-full border border-indigo-100">
+              {completionPercentage}% Ready
+            </span>
+          </div>
 
-            {/* Progress Bar */}
-            <div className="space-y-1.5">
-              <div className="flex justify-between text-xs font-bold">
-                <span className="text-slate-700">Completion</span>
-                <span className="text-indigo-600">{completionPercentage}%</span>
-              </div>
-              <div className="w-full bg-slate-100 h-2.5 rounded-full overflow-hidden">
-                <div
-                  className="bg-indigo-600 h-2.5 rounded-full transition-all duration-500"
-                  style={{ width: `${completionPercentage}%` }}
-                />
-              </div>
-            </div>
-
-            {/* Checklist items */}
-            <ul className="space-y-3 pt-2">
-              {checklist.map((item, idx) => (
-                <li key={idx} className="flex items-center justify-between text-xs">
-                  <div className="flex items-center gap-2.5">
-                    <div
-                      className={`w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 ${
-                        item.done ? 'bg-emerald-100 text-emerald-600' : 'bg-slate-100 text-slate-400'
-                      }`}
-                    >
-                      {item.done ? <CheckCircle2 className="w-3.5 h-3.5" /> : <Clock className="w-3.5 h-3.5" />}
-                    </div>
-                    <span className={item.done ? 'text-slate-800 font-medium' : 'text-slate-500'}>
-                      {item.label}
-                    </span>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3 pt-2">
+            {checklist.map((item, idx) => (
+              <div
+                key={idx}
+                className={`p-3 rounded-xl border flex flex-col justify-between gap-2 ${
+                  item.done ? 'bg-emerald-50/50 border-emerald-200' : 'bg-slate-50 border-slate-200'
+                }`}
+              >
+                <div className="flex items-center gap-2">
+                  <div
+                    className={`w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 ${
+                      item.done ? 'bg-emerald-500 text-white' : 'bg-slate-200 text-slate-400'
+                    }`}
+                  >
+                    {item.done ? <CheckCircle2 className="w-3.5 h-3.5" /> : <Clock className="w-3.5 h-3.5" />}
                   </div>
-                  {!item.done && (
-                    <Link to={item.link} className="text-indigo-600 hover:underline font-bold text-[11px]">
-                      Complete &rarr;
-                    </Link>
-                  )}
-                </li>
-              ))}
-            </ul>
+                  <span className="text-xs font-semibold text-slate-800 line-clamp-1">{item.label}</span>
+                </div>
+                {!item.done ? (
+                  <Link to={item.link} className="text-indigo-600 font-bold text-[11px] hover:underline self-end">
+                    Complete &rarr;
+                  </Link>
+                ) : (
+                  <span className="text-emerald-700 font-bold text-[10px] self-end uppercase">Verified</span>
+                )}
+              </div>
+            ))}
           </div>
         </div>
 

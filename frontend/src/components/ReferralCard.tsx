@@ -79,10 +79,15 @@ export const ReferralCard: React.FC<ReferralCardProps> = ({ referral, showAction
 
         {/* Required Skills Tags */}
         <div className="flex flex-wrap gap-1.5 mb-5">
-          {referral.requiredTechnologies.map((tech) => (
+          {(Array.isArray(referral.requiredTechnologies)
+            ? referral.requiredTechnologies
+            : typeof referral.requiredTechnologies === 'string'
+            ? (referral.requiredTechnologies as string).split(',').map((t) => t.trim())
+            : []
+          ).map((tech) => (
             <span
               key={tech}
-              className="px-2.5 py-1 text-xs font-semibold bg-slate-100 text-slate-700 rounded-lg border border-slate-200/60"
+              className="px-2.5 py-1 text-xs font-semibold bg-indigo-50/70 text-indigo-700 rounded-lg border border-indigo-100"
             >
               {tech}
             </span>

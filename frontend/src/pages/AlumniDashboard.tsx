@@ -35,28 +35,27 @@ export const AlumniDashboard: React.FC = () => {
   const fetchAlumniData = useCallback(async () => {
     setLoading(true);
     try {
-      // 1. Fetch posted referrals
-      const referralsRes = await api.get('/referrals/my');
-      const refs = Array.isArray(referralsRes.data)
-        ? referralsRes.data
-        : referralsRes.data.referrals || [];
+      const res = await api.get('/alumni/dashboard');
+      const refs = Array.isArray(res.data) ? res.data : res.data.referrals || [];
       setReferrals(refs);
 
       if (refs.length > 0 && !expandedReferralId) {
         setExpandedReferralId(refs[0].id);
       }
 
-      // 2. Fetch credibility score and history
-      const credRes = await api.get('/credibility');
-      if (credRes.data) {
-        setCredibility(credRes.data.credibility || credRes.data);
+      if (res.data && res.data.credibility) {
+        setCredibility({
+          alumnusId: user?.id || '',
+          score: res.data.credibility.score ?? 100,
+          history: res.data.credibility.history || [],
+        });
       }
     } catch {
-      // Use defaults if initial
+      // Fallback if not loaded
     } finally {
       setLoading(false);
     }
-  }, [expandedReferralId]);
+  }, [expandedReferralId, user?.id]);
 
   useEffect(() => {
     fetchAlumniData();

@@ -143,19 +143,30 @@ export const SkillGraph: React.FC<SkillGraphProps> = ({
                       <AlertCircle className="w-3.5 h-3.5 text-indigo-500" />
                       Referenced Repository Evidence:
                     </p>
-                    <ul className="space-y-1 pl-4 list-disc text-indigo-600">
-                      {skill.evidenceLinks.map((link, idx) => (
-                        <li key={idx}>
-                          <a
-                            href={link}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="hover:underline break-all"
-                          >
-                            {link}
-                          </a>
-                        </li>
-                      ))}
+                    <ul className="space-y-1.5 pl-2 text-slate-700">
+                      {skill.evidenceLinks.map((item: any, idx: number) => {
+                        const url = typeof item === 'string' ? item : item.url || '#';
+                        const repo = typeof item === 'string' ? item : item.repo || 'github.com/repository';
+                        const desc = typeof item === 'object' && item.description ? item.description : 'Verified repository code activity';
+
+                        return (
+                          <li key={idx} className="flex flex-col bg-white p-2.5 rounded-lg border border-slate-200">
+                            <div className="flex items-center justify-between">
+                              <span className="font-bold text-slate-900">{repo}</span>
+                              <a
+                                href={url}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="text-indigo-600 hover:text-indigo-800 text-[11px] font-semibold flex items-center gap-1"
+                              >
+                                <span>Inspect Repo</span>
+                                <ExternalLink className="w-3 h-3" />
+                              </a>
+                            </div>
+                            <span className="text-[11px] text-slate-500 mt-0.5">{desc}</span>
+                          </li>
+                        );
+                      })}
                     </ul>
                   </div>
                 )}

@@ -116,13 +116,19 @@ export const CandidateRankList: React.FC<CandidateRankListProps> = ({
                       <div className="flex items-center gap-2">
                         <User className="w-4 h-4 text-slate-400" />
                         <h4 className="font-bold text-slate-900 text-base">
-                          {cand.candidate?.name || `Candidate ${cand.candidateId.slice(0, 6)}`}
+                          {cand.candidate?.name || (cand as any).user?.name || `Candidate ${cand.candidateId.slice(0, 6)}`}
                         </h4>
                         {getStatusBadge(cand.status)}
                       </div>
                       <p className="text-xs text-slate-500 mt-0.5">
-                        {cand.candidate?.profile?.branch || 'Computer Science & Engineering'} &bull; Class of{' '}
-                        {cand.candidate?.profile?.graduationYear || '2026'}
+                        {cand.candidate?.profile?.branch ||
+                          (cand as any).profile?.branchProgram ||
+                          cand.candidate?.profile?.branchProgram ||
+                          'Computer Science & Engineering'}{' '}
+                        &bull; Class of{' '}
+                        {cand.candidate?.profile?.graduationYear ||
+                          (cand as any).profile?.graduationYear ||
+                          '2026'}
                       </p>
                     </div>
                   </div>

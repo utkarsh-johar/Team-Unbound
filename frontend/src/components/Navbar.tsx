@@ -26,7 +26,7 @@ interface NavLinkItem {
 }
 
 export const Navbar: React.FC = () => {
-  const { user, logout } = useAuth();
+  const { user, logout, demoLogin } = useAuth();
   const location = useLocation();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [userDropdownOpen, setUserDropdownOpen] = useState(false);
@@ -204,6 +204,61 @@ export const Navbar: React.FC = () => {
                         <ShieldCheck className="w-4 h-4 text-slate-400" />
                         Consent Settings
                       </Link>
+
+                      <div className="border-t border-slate-100 my-1" />
+
+                      {/* Quick Persona Switcher for Evaluation */}
+                      <div className="px-4 py-1.5">
+                        <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400">
+                          Switch Demo Role:
+                        </span>
+                        <div className="grid grid-cols-2 gap-1.5 mt-1.5">
+                          <button
+                            type="button"
+                            onClick={async () => {
+                              setUserDropdownOpen(false);
+                              await demoLogin('student');
+                              window.location.href = '/dashboard/student';
+                            }}
+                            className="px-2 py-1 text-[11px] font-semibold bg-indigo-50 hover:bg-indigo-100 text-indigo-700 rounded-md text-left transition"
+                          >
+                            🎓 Student
+                          </button>
+                          <button
+                            type="button"
+                            onClick={async () => {
+                              setUserDropdownOpen(false);
+                              await demoLogin('alumni');
+                              window.location.href = '/dashboard/alumni';
+                            }}
+                            className="px-2 py-1 text-[11px] font-semibold bg-emerald-50 hover:bg-emerald-100 text-emerald-700 rounded-md text-left transition"
+                          >
+                            🤝 Alumni
+                          </button>
+                          <button
+                            type="button"
+                            onClick={async () => {
+                              setUserDropdownOpen(false);
+                              await demoLogin('recruiter');
+                              window.location.href = '/dashboard/recruiter';
+                            }}
+                            className="px-2 py-1 text-[11px] font-semibold bg-amber-50 hover:bg-amber-100 text-amber-700 rounded-md text-left transition"
+                          >
+                            💼 Recruiter
+                          </button>
+                          <button
+                            type="button"
+                            onClick={async () => {
+                              setUserDropdownOpen(false);
+                              await demoLogin('admin');
+                              window.location.href = '/dashboard/admin';
+                            }}
+                            className="px-2 py-1 text-[11px] font-semibold bg-purple-50 hover:bg-purple-100 text-purple-700 rounded-md text-left transition"
+                          >
+                            🛡️ Admin
+                          </button>
+                        </div>
+                      </div>
 
                       <div className="border-t border-slate-100 my-1" />
 
