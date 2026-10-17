@@ -50,7 +50,10 @@ router.post('/demo-login', async (req, res) => {
     const targetEmail = emailMap[targetRole] || 'student1@demo.edu';
     const user = await User.findOne({
       where: { email: targetEmail },
-      include: [{ model: Institution }, { model: Profile }]
+      include: [
+        { model: Institution, as: 'institution', required: false },
+        { model: Profile, as: 'profile', required: false }
+      ]
     });
     if (!user) {
       return res.status(404).json({ error: `Demo user for role ${targetRole} not found. Run seed script.` });
