@@ -34,4 +34,37 @@ router.post('/select-role', isAuthenticated, authController.selectRole);
 // Logout
 router.post('/logout', isAuthenticated, authController.logout);
 
+// 1-Click Demo Login for Local Evaluation (seeds created in seed.js)
+router.post('/demo-login', async (req, res) => {
+  try {
+    const { User, Institution, Profile } = require('../models');
+    const { role } = req.body;
+    const targetRole = role || 'student';
+    const emailMap = {
+      student: 'student1@demo.edu',
+      alumni: 'alumni1@demo.edu',
+      recruiter: 'recruiter@company.com',
+      founder: 'founder@startup.com',
+      admin: 'admin@demo.edu',
+    };
+    const targetEmail = emailMap[targetRole] || 'student1@demo.edu';
+    const user = await User.findOne({
+      where: { email: targetEmail },
+      include: [{ model: Institution }, { model: Profile }]
+    });
+    if (!user) {
+      return res.status(404).json({ error: `Demo user for role ${targetRole} not found. Run seed script.` });
+    }
+    req.login(user, (err) => {
+      if (err) {
+        return res.status(500).json({ error: 'Failed to establish demo session' });
+      }
+      return res.json({ user });
+    });
+  } catch (error) {
+    console.error('Demo login error:', error);
+    return res.status(500).json({ error: error.message });
+  }
+});
+
 module.exports = router;
