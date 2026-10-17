@@ -6,85 +6,55 @@ SkillBridge is a platform that turns **verified coding skills into real career o
 
 ## Features (MVP — Phase 1)
 
-- **Google OAuth** authentication with role-based access (Student, Alumni, Recruiter, Founder)
-- **Consent-first GitHub connection** — public repos by default, private repos with separate opt-in
-- **Code-DNA Profile** — skill graph built from GitHub evidence (languages, libraries, activity)
-- **Technology Skill Scores** — per-technology scores (0–100) with linked evidence
-- **Flash Referrals** — short-lived referral slots posted by alumni with configurable expiry
-- **Fairness Gate** — eligibility checks, cooldowns, conflict flags, and fair rotation
-- **Ranked Top Five** — weighted matching (CodeDNA × 0.45 + Sandbox × 0.35 + Fit × 0.20)
-- **Alumni Credibility Score** — transparent reputation, firewalled from candidate scores
-- **Audit Logging** — every score change and referral decision logged with reason
-- **In-app Notifications** — notification center with unread count
-- **Recruiter Outcome Page** — confirm referral outcomes to update alumni credibility
-- **Admin Panel** — verify alumni, review appeals
+- **Dual Scoring Architecture**:
+  - **Overall Merit Score**: Composite ranking formula ($0.5 \times \text{Technology Skills Avg} + 0.3 \times \text{Phase 1 Baseline} + 0.2 \times \text{Normalized CGPA}$) displayed prominently with breakdown components.
+  - **Technology Skill Scores**: Deterministic 0–100 scores calculated per indexed technology from repository count, commit history, and activity recency with clickable GitHub evidence links.
+- **1-Click Demo Evaluation & Persona Switcher**: Instant evaluation buttons on the Login page and a live switcher in the top navigation bar to test **Student**, **Alumni**, **Recruiter**, and **Admin** flows without OAuth keys.
+- **Consent-First GitHub Connection**: Public repositories by default, private repositories with separate opt-in; least-privilege access.
+- **Code-DNA Profile**: Full visual skill breakdown with evidence links for review, disclaimer notices, and repository commits.
+- **Flash Referrals**: Short-lived referral slots posted by alumni with countdown timer and eligibility filters.
+- **Fairness Gate & Matching Engine**: Automated candidate qualification checking, cooldown tracking, and top-5 ranked candidate generation ($0.45 \times \text{Code-DNA} + 0.35 \times \text{Sandbox Placeholder} + 0.20 \times \text{Profile Fit}$).
+- **Alumni Credibility Score**: Dynamic reputation system with full audit trail (+15 on successful hires, -20 on failed screening, 0 on neutral).
+- **Recruiter Outcomes Flow**: Outcome submission interface with structured screening failure reasons.
+- **Audit Logging & Notifications**: Complete activity log with before/after state diffs and in-app notification center.
 
 ## Tech Stack
 
 | Layer | Technology |
 |---|---|
-| Frontend | React 18 + Vite + TypeScript + Tailwind CSS |
-| Backend | Node.js + Express.js |
-| Database | PostgreSQL + Sequelize ORM |
-| Auth | Passport.js (Google OAuth 2.0) |
+| Frontend | React 18 + Vite + TypeScript + Tailwind CSS + Lucide Icons |
+| Backend | Node.js + Express.js + Passport.js |
+| Database | SQLite (Zero-config local fallback) / PostgreSQL (via Sequelize ORM) |
+| Architecture | RESTful API with Session Cookies & Role-based Access Control |
 
 ## Prerequisites
 
 - **Node.js** >= 18
-- **PostgreSQL** >= 14 (local install or Docker)
-- **Google OAuth App** (configured with `http://localhost:5000/api/auth/google/callback`)
-- **GitHub OAuth App** (configured with `http://localhost:5000/api/github/callback`)
+- *(Optional)* **PostgreSQL** >= 14 (if not provided, automatically defaults to zero-config local SQLite database `skillbridge.sqlite`)
 
-## Local Setup
-
-### 1. Clone the repository
+## Quick Start (Instant Demo)
 
 ```bash
+# 1. Clone the repository
 git clone https://github.com/utkarsh-johar/Team-Unbound.git
 cd Team-Unbound
-```
 
-### 2. Configure environment
-
-Copy the example environment file and fill in your credentials:
-
-```bash
-cp backend/.env.example backend/.env
-```
-
-Required environment variables:
-
-| Variable | Description |
-|---|---|
-| `DATABASE_URL` | PostgreSQL connection string |
-| `GOOGLE_CLIENT_ID` | Google OAuth client ID |
-| `GOOGLE_CLIENT_SECRET` | Google OAuth client secret |
-| `GITHUB_CLIENT_ID` | GitHub OAuth App client ID |
-| `GITHUB_CLIENT_SECRET` | GitHub OAuth App client secret |
-| `SESSION_SECRET` | Express session secret (any random string) |
-
-### 3. Install dependencies
-
-```bash
+# 2. Install dependencies for both frontend and backend
 npm run install:all
-```
 
-### 4. Set up the database
-
-```bash
+# 3. Seed demo database (students, alumni, referrals, scores)
 cd backend
-npm run db:migrate
-npm run seed        # Loads labeled demo data
-```
+npm run seed
+cd ..
 
-### 5. Start development servers
-
-```bash
+# 4. Start frontend and backend concurrently
 npm run dev
 ```
 
-- **Frontend:** http://localhost:5173
+- **Frontend App:** http://localhost:5173
 - **Backend API:** http://localhost:5000
+
+On the login page ([http://localhost:5173/login](http://localhost:5173/login)), click any of the **1-Click Demo Buttons** (Student, Alumni, Recruiter, Admin) or use the persona switcher in the navigation bar.
 
 ## Demo Data
 
