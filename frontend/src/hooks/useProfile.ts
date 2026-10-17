@@ -51,9 +51,18 @@ export const useProfile = () => {
     setError(null);
     try {
       const response = await api.get('/profile/code-dna');
-      const data: CodeDnaData = response.data;
-      setCodeDna(data);
-      return data;
+      const raw = response.data;
+      const scores = raw.scores || (raw.codeDna && raw.codeDna.scores) || [];
+      const skills = raw.skills || (raw.codeDna && raw.codeDna.evidence) || [];
+      const normalized: CodeDnaData = {
+        skills,
+        scores,
+        overallMeritScore: raw.overallMeritScore,
+        lastComputedAt: raw.lastComputedAt || (scores[0] && scores[0].computedAt) || new Date().toISOString(),
+        disclaimer: raw.disclaimer || 'Activity data is evidence for review, not proof of authorship or AI use.',
+      };
+      setCodeDna(normalized);
+      return normalized;
     } catch (err: unknown) {
       const msg = err && typeof err === 'object' && 'response' in err && (err as { response?: { data?: { message?: string } } }).response?.data?.message
         ? (err as { response?: { data?: { message?: string } } }).response!.data!.message!

@@ -10,6 +10,7 @@ export interface Profile {
   userId: string;
   college?: string;
   branch?: string;
+  branchProgram?: string;
   graduationYear?: number;
   cgpa?: number; // self-reported, not verified
   careerIntent?: string[] | string;
@@ -195,6 +196,21 @@ export interface RecruiterInvite {
 export interface CodeDnaData {
   skills: SkillEvidence[];
   scores: TechSkillScore[];
+  overallMeritScore?: {
+    score: number;
+    maxScore: number;
+    components: {
+      skillsAvg: number;
+      skillsWeight: number;
+      bountiesScore: number;
+      bountiesWeight: number;
+      bountiesLabel: string;
+      cgpaScore: number;
+      cgpaWeight: number;
+      cgpaRaw: number;
+    };
+    formula: string;
+  };
   lastComputedAt?: string;
   disclaimer: string;
 }
