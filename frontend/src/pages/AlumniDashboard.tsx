@@ -75,7 +75,7 @@ export const AlumniDashboard: React.FC = () => {
   );
 
   return (
-    <div className="min-h-screen bg-slate-50 flex flex-col justify-between">
+    <div className="min-h-screen bg-[#f4f6f8] text-[#151717] flex flex-col justify-between selection:bg-[#fd5800] selection:text-white">
       <Navbar />
 
       <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
@@ -100,19 +100,19 @@ export const AlumniDashboard: React.FC = () => {
             </span>
           </div>
         ) : (
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white p-6 rounded-2xl border border-slate-200/90 shadow-sm">
             <div>
               <div className="flex items-center gap-2">
-                <span className="text-xs font-bold uppercase tracking-wider text-indigo-600">
+                <span className="text-xs font-bold uppercase tracking-wider text-[#125b63]">
                   Alumni Sponsor Workspace
                 </span>
-                <span className="px-2 py-0.5 text-[10px] font-bold bg-emerald-100 text-emerald-800 rounded-full border border-emerald-200 flex items-center gap-1">
+                <span className="px-2 py-0.5 text-[10px] font-bold bg-emerald-50 text-emerald-800 rounded-full border border-emerald-200 flex items-center gap-1">
                   <ShieldCheck className="w-3 h-3 text-emerald-600" />
                   Verified Alumnus
                 </span>
                 {user?.isDemo && <DemoBadge />}
               </div>
-              <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight mt-1">
+              <h1 className="text-2xl sm:text-3xl font-extrabold text-[#151717] tracking-tight mt-1">
                 Welcome back, {user?.name || 'Alumnus'}
               </h1>
               <p className="text-xs text-slate-500 mt-0.5">
@@ -122,7 +122,7 @@ export const AlumniDashboard: React.FC = () => {
 
             <Link
               to="/referrals/new"
-              className="inline-flex items-center gap-2 px-5 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold rounded-xl shadow-md shadow-indigo-100 transition-all self-start sm:self-auto"
+              className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#fd5800] hover:bg-[#e04e00] text-white text-xs font-bold rounded-xl shadow-md transition-all self-start sm:self-auto"
             >
               <PlusCircle className="w-4 h-4" />
               <span>Post Flash Referral</span>
@@ -132,13 +132,13 @@ export const AlumniDashboard: React.FC = () => {
 
         {/* Overview Stats */}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
-          <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex items-center justify-between">
+          <div className="bg-white p-5 rounded-2xl border border-slate-200/90 shadow-sm flex items-center justify-between">
             <div>
               <p className="text-xs font-bold text-slate-400 uppercase tracking-wider">Referrals Published</p>
-              <h3 className="text-2xl font-black text-slate-900 mt-1">{referrals.length}</h3>
+              <h3 className="text-2xl font-black text-[#151717] mt-1">{referrals.length}</h3>
               <p className="text-[11px] text-slate-500 mt-0.5">{totalSlots} total candidate slots</p>
             </div>
-            <div className="w-11 h-11 rounded-xl bg-indigo-100 text-indigo-700 flex items-center justify-center">
+            <div className="w-11 h-11 rounded-xl bg-[#125b63]/10 text-[#125b63] flex items-center justify-center">
               <Briefcase className="w-5 h-5" />
             </div>
           </div>
@@ -173,8 +173,8 @@ export const AlumniDashboard: React.FC = () => {
         <div className="space-y-6">
           <div className="flex items-center justify-between border-b border-slate-200 pb-4">
             <div>
-              <h2 className="text-xl font-bold text-slate-900 flex items-center gap-2">
-                <Briefcase className="w-5 h-5 text-indigo-600" />
+              <h2 className="text-xl font-bold text-[#151717] flex items-center gap-2">
+                <Briefcase className="w-5 h-5 text-[#125b63]" />
                 Your Flash Referrals & Ranked Candidates
               </h2>
               <p className="text-xs text-slate-500 mt-0.5">
@@ -198,7 +198,7 @@ export const AlumniDashboard: React.FC = () => {
                 <div className="pt-2">
                   <Link
                     to="/referrals/new"
-                    className="inline-flex items-center gap-2 px-5 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold rounded-xl shadow-sm"
+                    className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#fd5800] hover:bg-[#e04e00] text-white text-xs font-bold rounded-xl shadow-sm"
                   >
                     <PlusCircle className="w-4 h-4" />
                     Create First Referral
@@ -223,7 +223,7 @@ export const AlumniDashboard: React.FC = () => {
                       className="p-5 sm:p-6 hover:bg-slate-50/70 transition-colors cursor-pointer flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-100"
                     >
                       <div className="flex items-start gap-4">
-                        <div className="w-12 h-12 rounded-xl bg-indigo-50 border border-indigo-100 text-indigo-600 flex items-center justify-center flex-shrink-0">
+                        <div className="w-12 h-12 rounded-xl bg-[#125b63]/10 border border-[#125b63]/20 text-[#125b63] flex items-center justify-center flex-shrink-0">
                           <Building className="w-6 h-6" />
                         </div>
                         <div>
@@ -266,7 +266,7 @@ export const AlumniDashboard: React.FC = () => {
                         <Link
                           to={`/referrals/${referral.id}`}
                           onClick={(e) => e.stopPropagation()}
-                          className="px-3 py-1.5 text-xs font-bold text-indigo-600 hover:text-indigo-800 bg-indigo-50 hover:bg-indigo-100 rounded-lg transition-colors"
+                          className="px-3 py-1.5 text-xs font-bold text-[#125b63] hover:text-[#063f4a] bg-[#125b63]/10 hover:bg-[#125b63]/20 rounded-lg transition-colors"
                         >
                           Manage Referral
                         </Link>

@@ -17,7 +17,6 @@ import { useAuth } from '../hooks/useAuth';
 import { useReferrals } from '../hooks/useReferrals';
 import Navbar from '../components/Navbar';
 import CandidateRankList from '../components/CandidateRankList';
-import PaletteBar from '../components/PaletteBar';
 import DisclaimerBanner from '../components/DisclaimerBanner';
 import DemoBadge from '../components/DemoBadge';
 import { Referral } from '../types';
@@ -372,9 +371,6 @@ export const ReferralDetailPage: React.FC = () => {
                   />
                 </div>
               )}
-
-              {/* Embedded Palette Bar Preview */}
-              <PaletteBar showLabels={true} />
             </div>
           )}
         </div>

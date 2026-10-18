@@ -86,7 +86,7 @@ export const RecruiterDashboard: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 flex flex-col justify-between">
+    <div className="min-h-screen bg-[#f4f6f8] text-[#151717] flex flex-col justify-between selection:bg-[#fd5800] selection:text-white">
       <Navbar />
 
       <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
@@ -96,15 +96,15 @@ export const RecruiterDashboard: React.FC = () => {
         />
 
         {/* Header */}
-        <div className="bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div className="bg-white p-6 sm:p-8 rounded-2xl border border-slate-200/90 shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
             <div className="flex items-center gap-2">
-              <span className="text-xs font-bold uppercase tracking-wider text-purple-600">
+              <span className="text-xs font-bold uppercase tracking-wider text-[#125b63]">
                 Hiring Partner Portal
               </span>
               <DemoBadge />
             </div>
-            <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight mt-1">
+            <h1 className="text-2xl sm:text-3xl font-extrabold text-[#151717] tracking-tight mt-1">
               Referral Outcome Review
             </h1>
             <p className="text-xs text-slate-500 mt-1 max-w-xl">
@@ -112,7 +112,7 @@ export const RecruiterDashboard: React.FC = () => {
             </p>
           </div>
 
-          <div className="p-3 bg-purple-50 text-purple-800 rounded-xl border border-purple-200 text-xs">
+          <div className="p-3 bg-[#125b63]/10 text-[#125b63] rounded-xl border border-[#125b63]/20 text-xs">
             <span className="font-bold block">Outcome Impact Policy:</span>
             <ul className="text-[11px] space-y-0.5 mt-0.5">
               <li>&bull; Successful: <strong>+15 Credibility</strong> to Alumnus</li>
@@ -132,8 +132,8 @@ export const RecruiterDashboard: React.FC = () => {
         {/* Referrals & Candidates List */}
         <div className="space-y-6">
           <div className="border-b border-slate-200 pb-3">
-            <h2 className="text-lg font-bold text-slate-900 flex items-center gap-2">
-              <Building2 className="w-5 h-5 text-indigo-600" />
+            <h2 className="text-lg font-bold text-[#151717] flex items-center gap-2">
+              <Building2 className="w-5 h-5 text-[#125b63]" />
               Referred Candidate Inquiries
             </h2>
             <p className="text-xs text-slate-500 mt-0.5">
@@ -206,7 +206,7 @@ export const RecruiterDashboard: React.FC = () => {
                             >
                               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-100 pb-3">
                                 <div className="flex items-center gap-3">
-                                  <div className="w-9 h-9 rounded-full bg-indigo-100 text-indigo-700 flex items-center justify-center font-bold text-xs">
+                                  <div className="w-9 h-9 rounded-full bg-[#125b63]/10 text-[#125b63] flex items-center justify-center font-bold text-xs">
                                     <User className="w-4 h-4" />
                                   </div>
                                   <div>
@@ -325,7 +325,7 @@ export const RecruiterDashboard: React.FC = () => {
                                       setNotes((prev) => ({ ...prev, [key]: e.target.value }))
                                     }
                                     placeholder="Add any contextual observations for the hiring audit log..."
-                                    className="w-full text-xs p-2.5 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                                    className="w-full text-xs p-2.5 rounded-xl border border-slate-300 focus:outline-none focus:border-[#125b63]"
                                   />
                                 </div>
 
@@ -334,7 +334,7 @@ export const RecruiterDashboard: React.FC = () => {
                                     type="button"
                                     disabled={isSubmitting}
                                     onClick={() => handleOutcomeSubmit(referral.id, cand.candidateId)}
-                                    className="inline-flex items-center gap-2 px-4 py-2 bg-slate-900 hover:bg-indigo-600 text-white rounded-xl text-xs font-bold shadow-sm transition-all disabled:opacity-50"
+                                    className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#fd5800] hover:bg-[#e04e00] text-white rounded-xl text-xs font-bold shadow-md transition-all disabled:opacity-50"
                                   >
                                     <Send className="w-3.5 h-3.5" />
                                     {isSubmitting ? 'Recording Outcome...' : 'Submit Final Outcome'}

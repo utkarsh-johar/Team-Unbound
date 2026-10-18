@@ -110,7 +110,7 @@ export const ConsentManager: React.FC = () => {
   if (loading) {
     return (
       <div className="bg-white rounded-2xl border border-slate-200 p-8 text-center text-slate-500">
-        <RefreshCw className="w-6 h-6 animate-spin mx-auto mb-2 text-indigo-600" />
+        <RefreshCw className="w-6 h-6 animate-spin mx-auto mb-2 text-[#125b63]" />
         <p className="text-sm font-medium">Loading consent ledger...</p>
       </div>
     );
@@ -136,7 +136,7 @@ export const ConsentManager: React.FC = () => {
       <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 space-y-6">
         <div className="border-b border-slate-100 pb-4">
           <div className="flex items-center gap-2.5">
-            <ShieldCheck className="w-6 h-6 text-indigo-600" />
+            <ShieldCheck className="w-6 h-6 text-[#125b63]" />
             <h3 className="text-lg font-bold text-slate-900">Data Access & Consent Management</h3>
           </div>
           <p className="text-xs text-slate-500 mt-1">
@@ -149,7 +149,7 @@ export const ConsentManager: React.FC = () => {
           {/* Public Repos Toggle */}
           <div className="flex flex-col sm:flex-row sm:items-center justify-between p-4 rounded-xl border border-slate-200 bg-slate-50/50 gap-4">
             <div className="flex items-start gap-3.5">
-              <div className="w-10 h-10 rounded-xl bg-indigo-100 text-indigo-700 flex items-center justify-center flex-shrink-0">
+              <div className="w-10 h-10 rounded-xl bg-[#125b63]/10 text-[#125b63] flex items-center justify-center flex-shrink-0">
                 <GitBranch className="w-5 h-5" />
               </div>
               <div>
@@ -165,8 +165,8 @@ export const ConsentManager: React.FC = () => {
                 type="button"
                 disabled={saving}
                 onClick={() => handleToggle('publicReposGranted')}
-                className={`relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-indigo-600 focus:ring-offset-2 ${
-                  consent.publicReposGranted ? 'bg-indigo-600' : 'bg-slate-300'
+                className={`relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-[#125b63] focus:ring-offset-2 ${
+                  consent.publicReposGranted ? 'bg-[#125b63]' : 'bg-slate-300'
                 }`}
                 role="switch"
                 aria-checked={consent.publicReposGranted}
@@ -204,8 +204,8 @@ export const ConsentManager: React.FC = () => {
                 type="button"
                 disabled={saving}
                 onClick={() => handleToggle('privateReposGranted')}
-                className={`relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-indigo-600 focus:ring-offset-2 ${
-                  consent.privateReposGranted ? 'bg-indigo-600' : 'bg-slate-300'
+                className={`relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-[#125b63] focus:ring-offset-2 ${
+                  consent.privateReposGranted ? 'bg-[#125b63]' : 'bg-slate-300'
                 }`}
                 role="switch"
                 aria-checked={consent.privateReposGranted}

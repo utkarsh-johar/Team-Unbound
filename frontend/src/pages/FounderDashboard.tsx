@@ -5,7 +5,7 @@ import DisclaimerBanner from '../components/DisclaimerBanner';
 
 export const FounderDashboard: React.FC = () => {
   return (
-    <div className="min-h-screen bg-slate-50 flex flex-col justify-between">
+    <div className="min-h-screen bg-[#f4f6f8] text-[#151717] flex flex-col justify-between selection:bg-[#fd5800] selection:text-white">
       <Navbar />
 
       <main className="flex-1 max-w-5xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-8">
@@ -14,8 +14,8 @@ export const FounderDashboard: React.FC = () => {
           variant="info"
         />
 
-        <div className="bg-white rounded-2xl border border-slate-200 shadow-xl p-8 sm:p-12 text-center space-y-6">
-          <div className="w-16 h-16 rounded-2xl bg-gradient-to-tr from-amber-500 to-orange-500 text-white flex items-center justify-center mx-auto shadow-lg shadow-orange-100">
+        <div className="bg-white rounded-2xl border border-slate-200/90 shadow-xl p-8 sm:p-12 text-center space-y-6">
+          <div className="w-16 h-16 rounded-2xl bg-gradient-to-tr from-[#8d5535] to-[#fd5800] text-white flex items-center justify-center mx-auto shadow-lg shadow-orange-100">
             <Rocket className="w-8 h-8" />
           </div>
 
@@ -24,7 +24,7 @@ export const FounderDashboard: React.FC = () => {
               <Sparkles className="w-3.5 h-3.5 text-amber-600" />
               Phase 3 Concept
             </div>
-            <h1 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
+            <h1 className="text-3xl sm:text-4xl font-extrabold text-[#151717] tracking-tight">
               Founder Pods & Product Labs
             </h1>
             <p className="text-sm text-slate-600 max-w-lg mx-auto leading-relaxed">
@@ -35,7 +35,7 @@ export const FounderDashboard: React.FC = () => {
           {/* Planned Features Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-left max-w-2xl mx-auto pt-4">
             <div className="p-5 rounded-xl border border-slate-200 bg-slate-50/60 space-y-2">
-              <div className="flex items-center gap-2 text-indigo-600 font-bold text-sm">
+              <div className="flex items-center gap-2 text-[#125b63] font-bold text-sm">
                 <Code2 className="w-4 h-4" />
                 <span>Task Pods</span>
               </div>

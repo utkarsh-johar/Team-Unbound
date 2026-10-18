@@ -12,27 +12,27 @@ export const ProfilePage: React.FC = () => {
   const { profile, updateProfile } = useProfile();
 
   return (
-    <div className="min-h-screen bg-slate-50 flex flex-col justify-between">
+    <div className="min-h-screen bg-[#f4f6f8] text-[#151717] flex flex-col justify-between selection:bg-[#fd5800] selection:text-white">
       <Navbar />
 
       <main className="flex-1 max-w-4xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-8">
         {/* User Card */}
-        <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 sm:p-7 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div className="bg-white rounded-2xl border border-slate-200/90 shadow-sm p-6 sm:p-7 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div className="flex items-center gap-4">
-            <div className="w-14 h-14 rounded-2xl bg-indigo-100 text-indigo-700 font-extrabold text-xl flex items-center justify-center">
+            <div className="w-14 h-14 rounded-2xl bg-[#f2521d] text-white font-extrabold text-xl flex items-center justify-center shadow-sm">
               {user?.name ? user.name.charAt(0).toUpperCase() : 'U'}
             </div>
             <div>
               <div className="flex items-center gap-2">
-                <h2 className="text-xl font-bold text-slate-900">{user?.name}</h2>
+                <h2 className="text-xl font-bold text-[#151717]">{user?.name}</h2>
                 {user?.isDemo && <DemoBadge />}
-                <span className="px-2.5 py-0.5 text-xs font-bold bg-indigo-50 text-indigo-700 rounded-full capitalize">
+                <span className="px-2.5 py-0.5 text-xs font-bold bg-[#125b63]/10 text-[#125b63] rounded-full border border-[#125b63]/20 capitalize">
                   {user?.role}
                 </span>
               </div>
               <p className="text-xs text-slate-500 mt-0.5">{user?.email}</p>
               {user?.institution && (
-                <p className="text-xs text-indigo-600 font-semibold mt-0.5">
+                <p className="text-xs text-[#125b63] font-semibold mt-0.5">
                   {user.institution.name}
                 </p>
               )}

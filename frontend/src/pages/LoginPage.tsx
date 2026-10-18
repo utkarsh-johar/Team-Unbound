@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import { ArrowRight, Mail, User, School, AlertCircle, Sparkles } from 'lucide-react';
 import { useAuth } from '../hooks/useAuth';
 import Navbar from '../components/Navbar';
-import PaletteBar from '../components/PaletteBar';
 import DisclaimerBanner from '../components/DisclaimerBanner';
 
 export const LoginPage: React.FC = () => {
@@ -268,11 +267,6 @@ export const LoginPage: React.FC = () => {
                   🛡️ Demo Admin
                 </button>
               </div>
-            </div>
-
-            {/* Embedded Palette Bar */}
-            <div className="pt-2">
-              <PaletteBar showLabels={false} />
             </div>
           </div>
         </div>

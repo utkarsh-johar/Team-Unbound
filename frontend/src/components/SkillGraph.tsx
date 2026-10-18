@@ -51,7 +51,7 @@ export const SkillGraph: React.FC<SkillGraphProps> = ({
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-100 pb-4">
         <div>
           <h3 className="text-lg font-bold text-slate-900 flex items-center gap-2">
-            <Code2 className="w-5 h-5 text-indigo-600" />
+            <Code2 className="w-5 h-5 text-[#125b63]" />
             {title}
           </h3>
           <p className="text-xs text-slate-500 mt-0.5">{subtitle}</p>
@@ -87,7 +87,7 @@ export const SkillGraph: React.FC<SkillGraphProps> = ({
               <div
                 key={skill.technology}
                 className={`p-4 rounded-xl border transition-all ${
-                  isExpanded ? 'border-indigo-400 bg-indigo-50/20 shadow-sm' : 'border-slate-200 hover:border-slate-300 bg-slate-50/50'
+                  isExpanded ? 'border-[#125b63] bg-[#125b63]/5 shadow-sm' : 'border-slate-200 hover:border-slate-300 bg-slate-50/50'
                 }`}
               >
                 <div className="flex items-center justify-between gap-3 mb-2">
@@ -128,7 +128,7 @@ export const SkillGraph: React.FC<SkillGraphProps> = ({
                     <button
                       type="button"
                       onClick={() => setSelectedTech(isExpanded ? null : skill.technology)}
-                      className="text-xs font-semibold text-indigo-600 hover:text-indigo-800 flex items-center gap-1"
+                      className="text-xs font-semibold text-[#125b63] hover:text-[#063f4a] flex items-center gap-1"
                     >
                       {isExpanded ? 'Hide Evidence' : 'Inspect Evidence'}
                       <ExternalLink className="w-3 h-3" />
@@ -140,7 +140,7 @@ export const SkillGraph: React.FC<SkillGraphProps> = ({
                 {isExpanded && skill.evidenceLinks && (
                   <div className="mt-3 pt-3 border-t border-slate-200 space-y-1.5 text-xs">
                     <p className="font-semibold text-slate-700 flex items-center gap-1">
-                      <AlertCircle className="w-3.5 h-3.5 text-indigo-500" />
+                      <AlertCircle className="w-3.5 h-3.5 text-[#125b63]" />
                       Referenced Repository Evidence:
                     </p>
                     <ul className="space-y-1.5 pl-2 text-slate-700">
@@ -157,7 +157,7 @@ export const SkillGraph: React.FC<SkillGraphProps> = ({
                                 href={url}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="text-indigo-600 hover:text-indigo-800 text-[11px] font-semibold flex items-center gap-1"
+                                className="text-[#125b63] hover:text-[#063f4a] text-[11px] font-semibold flex items-center gap-1"
                               >
                                 <span>Inspect Repo</span>
                                 <ExternalLink className="w-3 h-3" />

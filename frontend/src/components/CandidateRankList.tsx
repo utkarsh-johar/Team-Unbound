@@ -46,7 +46,7 @@ export const CandidateRankList: React.FC<CandidateRankListProps> = ({
       case 'ranked':
       default:
         return (
-          <span className="inline-flex items-center gap-1 px-2.5 py-1 text-xs font-bold bg-indigo-50 text-indigo-700 rounded-full border border-indigo-200">
+          <span className="inline-flex items-center gap-1 px-2.5 py-1 text-xs font-bold bg-[#125b63]/10 text-[#125b63] rounded-full border border-[#125b63]/20">
             Ranked Shortlist
           </span>
         );
@@ -92,7 +92,7 @@ export const CandidateRankList: React.FC<CandidateRankListProps> = ({
                 className={`p-4 sm:p-5 rounded-xl border transition-all ${
                   isSelected
                     ? 'border-emerald-300 bg-emerald-50/20'
-                    : 'border-slate-200 hover:border-indigo-200 bg-white'
+                    : 'border-slate-200 hover:border-[#125b63]/40 bg-white'
                 }`}
               >
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
@@ -136,7 +136,7 @@ export const CandidateRankList: React.FC<CandidateRankListProps> = ({
                   {/* Overall Match Score */}
                   <div className="flex items-center justify-between sm:justify-end gap-4">
                     <div className="text-right">
-                      <div className="text-2xl font-black text-indigo-600">
+                      <div className="text-2xl font-black text-[#125b63]">
                         {Math.round(cand.matchScore)}
                         <span className="text-xs font-normal text-slate-400">/100</span>
                       </div>
@@ -159,7 +159,7 @@ export const CandidateRankList: React.FC<CandidateRankListProps> = ({
                           onClick={() => handleSelect(cand.candidateId)}
                           className={`px-4 py-2 text-xs font-bold rounded-lg transition-all shadow-sm ${
                             canSelect
-                              ? 'bg-indigo-600 hover:bg-indigo-700 text-white shadow-indigo-100'
+                              ? 'bg-[#fd5800] hover:bg-[#e04e00] text-white shadow-md'
                               : 'bg-slate-100 text-slate-400 cursor-not-allowed'
                           }`}
                         >
@@ -180,7 +180,7 @@ export const CandidateRankList: React.FC<CandidateRankListProps> = ({
                     </div>
                     <div className="w-full bg-slate-200 h-1.5 rounded-full overflow-hidden">
                       <div
-                        className="bg-indigo-500 h-1.5 rounded-full"
+                        className="bg-[#125b63] h-1.5 rounded-full"
                         style={{ width: `${cand.codeDnaScore}%` }}
                       />
                     </div>

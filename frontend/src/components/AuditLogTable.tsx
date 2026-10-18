@@ -48,7 +48,7 @@ export const AuditLogTable: React.FC<AuditLogTableProps> = ({ entries = [], load
     if (act.includes('CREATE') || act.includes('APPROVE') || act.includes('GRANT') || act.includes('REFERRED')) {
       return 'bg-emerald-50 text-emerald-700 border-emerald-200';
     }
-    return 'bg-indigo-50 text-indigo-700 border-indigo-200';
+    return 'bg-[#125b63]/10 text-[#125b63] border-[#125b63]/20';
   };
 
   return (
@@ -57,7 +57,7 @@ export const AuditLogTable: React.FC<AuditLogTableProps> = ({ entries = [], load
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-slate-100">
         <div>
           <h3 className="text-base font-bold text-slate-900 flex items-center gap-2">
-            <Shield className="w-5 h-5 text-indigo-600" />
+            <Shield className="w-5 h-5 text-[#125b63]" />
             System Audit & Accountability Ledger
           </h3>
           <p className="text-xs text-slate-500 mt-0.5">
@@ -74,7 +74,7 @@ export const AuditLogTable: React.FC<AuditLogTableProps> = ({ entries = [], load
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               placeholder="Search audit trail..."
-              className="pl-8 pr-3 py-1.5 text-xs rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              className="pl-8 pr-3 py-1.5 text-xs rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#125b63]"
             />
           </div>
 
@@ -83,7 +83,7 @@ export const AuditLogTable: React.FC<AuditLogTableProps> = ({ entries = [], load
             <select
               value={actionFilter}
               onChange={(e) => setActionFilter(e.target.value)}
-              className="text-xs py-1.5 px-2 rounded-lg border border-slate-200 bg-white text-slate-700 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              className="text-xs py-1.5 px-2 rounded-lg border border-slate-200 bg-white text-slate-700 focus:outline-none focus:ring-2 focus:ring-[#125b63]"
             >
               <option value="ALL">All Actions</option>
               {uniqueActions.map((act) => (
@@ -133,12 +133,12 @@ export const AuditLogTable: React.FC<AuditLogTableProps> = ({ entries = [], load
                       onClick={() => hasDiff && toggleExpand(entry.id)}
                       className={`hover:bg-slate-50 transition-colors ${
                         hasDiff ? 'cursor-pointer' : ''
-                      } ${isExpanded ? 'bg-indigo-50/20' : ''}`}
+                      } ${isExpanded ? 'bg-[#125b63]/10' : ''}`}
                     >
                       <td className="py-3 px-3 text-slate-400 w-6">
                         {hasDiff && (
                           isExpanded ? (
-                            <ChevronDown className="w-4 h-4 text-indigo-600" />
+                            <ChevronDown className="w-4 h-4 text-[#125b63]" />
                           ) : (
                             <ChevronRight className="w-4 h-4" />
                           )
@@ -179,7 +179,7 @@ export const AuditLogTable: React.FC<AuditLogTableProps> = ({ entries = [], load
                         <td colSpan={6} className="p-4 border-y border-slate-200">
                           <div className="space-y-2">
                             <div className="flex items-center gap-1.5 text-xs font-bold text-slate-700">
-                              <FileCode className="w-4 h-4 text-indigo-500" />
+                              <FileCode className="w-4 h-4 text-[#125b63]" />
                               <span>State Mutation Snapshot (Before vs. After):</span>
                             </div>
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-3 text-[11px] font-mono">

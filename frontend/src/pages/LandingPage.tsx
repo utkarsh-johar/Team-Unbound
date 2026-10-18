@@ -7,7 +7,6 @@ import {
   Play,
 } from 'lucide-react';
 import Navbar from '../components/Navbar';
-import PaletteBar from '../components/PaletteBar';
 import DisclaimerBanner from '../components/DisclaimerBanner';
 
 export const LandingPage: React.FC = () => {
@@ -96,10 +95,6 @@ export const LandingPage: React.FC = () => {
           </div>
         </section>
 
-        {/* Palette Bar Demonstration Section */}
-        <section className="py-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <PaletteBar showLabels={true} />
-        </section>
 
         {/* Value Proposition Cards from Screenshot */}
         <section id="how-it-works" className="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

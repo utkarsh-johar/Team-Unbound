@@ -136,7 +136,7 @@ export const AdminDashboard: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 flex flex-col justify-between">
+    <div className="min-h-screen bg-[#f4f6f8] text-[#151717] flex flex-col justify-between selection:bg-[#fd5800] selection:text-white">
       <Navbar />
 
       <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
@@ -146,17 +146,17 @@ export const AdminDashboard: React.FC = () => {
         />
 
         {/* Header */}
-        <div className="bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div className="bg-white p-6 sm:p-8 rounded-2xl border border-slate-200/90 shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
             <div className="flex items-center gap-2">
-              <span className="text-xs font-bold uppercase tracking-wider text-indigo-600">
+              <span className="text-xs font-bold uppercase tracking-wider text-[#125b63]">
                 System Administration
               </span>
-              <span className="px-2 py-0.5 text-[10px] font-bold bg-indigo-100 text-indigo-700 rounded-full">
+              <span className="px-2 py-0.5 text-[10px] font-bold bg-[#125b63]/10 text-[#125b63] rounded-full border border-[#125b63]/20">
                 Root Access
               </span>
             </div>
-            <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight mt-1">
+            <h1 className="text-2xl sm:text-3xl font-extrabold text-[#151717] tracking-tight mt-1">
               Admin Governance & Auditing
             </h1>
             <p className="text-xs text-slate-500 mt-1">
@@ -171,8 +171,8 @@ export const AdminDashboard: React.FC = () => {
               onClick={() => setActiveTab('verifications')}
               className={`px-3.5 py-2 rounded-lg transition-all ${
                 activeTab === 'verifications'
-                  ? 'bg-white text-indigo-600 shadow-sm'
-                  : 'text-slate-600 hover:text-slate-900'
+                  ? 'bg-[#125b63] text-white shadow-sm'
+                  : 'text-slate-600 hover:text-[#125b63]'
               }`}
             >
               Alumni Verifications ({pendingAlumni.length})
@@ -182,8 +182,8 @@ export const AdminDashboard: React.FC = () => {
               onClick={() => setActiveTab('appeals')}
               className={`px-3.5 py-2 rounded-lg transition-all ${
                 activeTab === 'appeals'
-                  ? 'bg-white text-indigo-600 shadow-sm'
-                  : 'text-slate-600 hover:text-slate-900'
+                  ? 'bg-[#125b63] text-white shadow-sm'
+                  : 'text-slate-600 hover:text-[#125b63]'
               }`}
             >
               Appeals ({appeals.filter((a) => a.status === 'pending').length})
@@ -193,8 +193,8 @@ export const AdminDashboard: React.FC = () => {
               onClick={() => setActiveTab('audit')}
               className={`px-3.5 py-2 rounded-lg transition-all ${
                 activeTab === 'audit'
-                  ? 'bg-white text-indigo-600 shadow-sm'
-                  : 'text-slate-600 hover:text-slate-900'
+                  ? 'bg-[#125b63] text-white shadow-sm'
+                  : 'text-slate-600 hover:text-[#125b63]'
               }`}
             >
               Audit Trail ({auditLogs.length})
@@ -204,11 +204,11 @@ export const AdminDashboard: React.FC = () => {
 
         {/* Tab 1: Alumni Verifications */}
         {activeTab === 'verifications' && (
-          <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 space-y-6">
+          <div className="bg-white rounded-2xl border border-slate-200/90 shadow-sm p-6 space-y-6">
             <div className="flex items-center justify-between border-b border-slate-100 pb-4">
               <div>
-                <h3 className="text-base font-bold text-slate-900 flex items-center gap-2">
-                  <Users className="w-5 h-5 text-indigo-600" />
+                <h3 className="text-base font-bold text-[#151717] flex items-center gap-2">
+                  <Users className="w-5 h-5 text-[#125b63]" />
                   Pending Alumni Verifications
                 </h3>
                 <p className="text-xs text-slate-500 mt-0.5">
@@ -218,7 +218,7 @@ export const AdminDashboard: React.FC = () => {
               <button
                 type="button"
                 onClick={fetchVerifications}
-                className="text-xs text-indigo-600 hover:text-indigo-800 flex items-center gap-1 font-semibold"
+                className="text-xs text-[#125b63] hover:text-[#063f4a] flex items-center gap-1 font-semibold"
               >
                 <RefreshCw className="w-3.5 h-3.5" />
                 Refresh
@@ -314,7 +314,7 @@ export const AdminDashboard: React.FC = () => {
               <button
                 type="button"
                 onClick={fetchAppeals}
-                className="text-xs text-indigo-600 hover:text-indigo-800 flex items-center gap-1 font-semibold"
+                className="text-xs text-[#125b63] hover:text-[#063f4a] flex items-center gap-1 font-semibold"
               >
                 <RefreshCw className="w-3.5 h-3.5" />
                 Refresh
@@ -344,7 +344,7 @@ export const AdminDashboard: React.FC = () => {
                       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-200 pb-2">
                         <div className="flex items-center gap-2">
                           <span className="text-xs font-bold text-slate-800">
-                            Appeal ID: <span className="font-mono text-indigo-600">{appeal.id.slice(0, 8)}</span>
+                            Appeal ID: <span className="font-mono text-[#125b63]">{appeal.id.slice(0, 8)}</span>
                           </span>
                           <span
                             className={`px-2 py-0.5 rounded-full text-[10px] font-bold ${
@@ -431,7 +431,7 @@ export const AdminDashboard: React.FC = () => {
         {selectedAction && (
           <div className="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4">
             <div className="bg-white rounded-2xl max-w-lg w-full p-6 shadow-2xl border border-slate-200 space-y-4">
-              <div className="flex items-center gap-2.5 text-indigo-600 border-b border-slate-100 pb-3">
+              <div className="flex items-center gap-2.5 text-[#125b63] border-b border-slate-100 pb-3">
                 <ShieldCheck className="w-6 h-6" />
                 <h3 className="font-bold text-base text-slate-900">{selectedAction.title}</h3>
               </div>
@@ -456,7 +456,7 @@ export const AdminDashboard: React.FC = () => {
                   value={actionReason}
                   onChange={(e) => setActionReason(e.target.value)}
                   placeholder="Provide precise administrative context, policy citations, or verified credentials..."
-                  className="w-full text-xs p-3 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 bg-slate-50/50"
+                  className="w-full text-xs p-3 rounded-xl border border-slate-300 focus:outline-none focus:border-[#125b63] bg-slate-50/50"
                   required
                 />
               </div>
@@ -475,7 +475,7 @@ export const AdminDashboard: React.FC = () => {
                   type="button"
                   disabled={submittingAction || !actionReason.trim()}
                   onClick={handleExecuteAction}
-                  className="px-5 py-2 text-xs font-bold text-white bg-indigo-600 hover:bg-indigo-700 rounded-lg shadow-sm disabled:opacity-50"
+                  className="px-5 py-2 text-xs font-bold text-white bg-[#fd5800] hover:bg-[#e04e00] rounded-lg shadow-sm disabled:opacity-50 transition-all"
                 >
                   {submittingAction ? 'Writing to Audit Ledger...' : 'Commit Decision'}
                 </button>

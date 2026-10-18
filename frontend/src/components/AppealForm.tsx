@@ -120,7 +120,7 @@ export const AppealForm: React.FC<AppealFormProps> = ({
         value={reason}
         onChange={(e) => setReason(e.target.value)}
         rows={3}
-        className="w-full text-xs p-2.5 rounded-lg border border-slate-300 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 bg-white"
+        className="w-full text-xs p-2.5 rounded-lg border border-slate-300 focus:outline-none focus:border-[#125b63] bg-white"
         placeholder="Provide details regarding the referral outcome and why the penalty should be reviewed..."
         disabled={submitting}
       />
@@ -139,7 +139,7 @@ export const AppealForm: React.FC<AppealFormProps> = ({
         <button
           type="submit"
           disabled={submitting || !reason.trim()}
-          className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-bold text-white bg-indigo-600 hover:bg-indigo-700 rounded-lg shadow-sm disabled:opacity-50"
+          className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-bold text-white bg-[#fd5800] hover:bg-[#e04e00] rounded-lg shadow-sm disabled:opacity-50 transition-all"
         >
           <Send className="w-3.5 h-3.5" />
           {submitting ? 'Submitting...' : 'Submit Appeal'}

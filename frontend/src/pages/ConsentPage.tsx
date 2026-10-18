@@ -5,12 +5,12 @@ import DisclaimerBanner from '../components/DisclaimerBanner';
 
 export const ConsentPage: React.FC = () => {
   return (
-    <div className="min-h-screen bg-slate-50 flex flex-col justify-between">
+    <div className="min-h-screen bg-[#f4f6f8] text-[#151717] flex flex-col justify-between selection:bg-[#fd5800] selection:text-white">
       <Navbar />
 
       <main className="flex-1 max-w-4xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-8">
         <div>
-          <h1 className="text-3xl font-extrabold text-slate-900 tracking-tight">
+          <h1 className="text-3xl font-extrabold text-[#151717] tracking-tight">
             Consent & Privacy Preferences
           </h1>
           <p className="text-sm text-slate-600 mt-1">

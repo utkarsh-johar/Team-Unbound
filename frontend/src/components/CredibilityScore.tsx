@@ -33,7 +33,7 @@ export const CredibilityScore: React.FC<CredibilityScoreProps> = ({ credibility,
 
   const getScoreStatus = (val: number) => {
     if (val >= 115) return { label: 'Top Tier Alumnus', color: 'text-emerald-600', bg: 'bg-emerald-50' };
-    if (val >= 100) return { label: 'In Good Standing', color: 'text-indigo-600', bg: 'bg-indigo-50' };
+    if (val >= 100) return { label: 'In Good Standing', color: 'text-[#125b63]', bg: 'bg-[#125b63]/10' };
     if (val >= 80) return { label: 'Standard Standing', color: 'text-amber-600', bg: 'bg-amber-50' };
     return { label: 'Under Review', color: 'text-rose-600', bg: 'bg-rose-50' };
   };
@@ -46,7 +46,7 @@ export const CredibilityScore: React.FC<CredibilityScoreProps> = ({ credibility,
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-100 pb-5">
         <div>
           <div className="flex items-center gap-2">
-            <Award className="w-5 h-5 text-indigo-600" />
+            <Award className="w-5 h-5 text-[#125b63]" />
             <h3 className="text-lg font-bold text-slate-900">Alumni Credibility Score</h3>
           </div>
           <p className="text-xs text-slate-500 mt-1 max-w-md">
@@ -123,7 +123,7 @@ export const CredibilityScore: React.FC<CredibilityScoreProps> = ({ credibility,
                           </span>
                         </div>
                         {entry.referralTitle && (
-                          <p className="text-xs text-indigo-600 mt-0.5">
+                          <p className="text-xs text-[#125b63] font-semibold mt-0.5">
                             Referral: {entry.referralTitle}
                           </p>
                         )}

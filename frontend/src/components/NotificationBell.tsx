@@ -40,7 +40,7 @@ export const NotificationBell: React.FC = () => {
       <button
         type="button"
         onClick={() => setIsOpen((prev) => !prev)}
-        className="relative p-2 rounded-full text-slate-600 hover:text-indigo-600 hover:bg-slate-100 transition-colors focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+        className="relative p-2 rounded-full text-slate-600 hover:text-[#125b63] hover:bg-slate-100 transition-colors focus:outline-none focus:ring-2 focus:ring-[#125b63] focus:ring-offset-2"
         aria-label="Open notifications"
       >
         <Bell className="w-5 h-5" />
@@ -57,7 +57,7 @@ export const NotificationBell: React.FC = () => {
             <div className="flex items-center gap-2">
               <span className="font-semibold text-slate-800 text-sm">Notifications</span>
               {unreadCount > 0 && (
-                <span className="px-1.5 py-0.5 text-xs font-semibold bg-indigo-100 text-indigo-700 rounded-full">
+                <span className="px-1.5 py-0.5 text-xs font-semibold bg-[#125b63]/10 text-[#125b63] rounded-full border border-[#125b63]/20">
                   {unreadCount} new
                 </span>
               )}
@@ -66,7 +66,7 @@ export const NotificationBell: React.FC = () => {
               <button
                 type="button"
                 onClick={markAllAsRead}
-                className="text-xs text-indigo-600 hover:text-indigo-800 font-medium flex items-center gap-1"
+                className="text-xs text-[#125b63] hover:text-[#063f4a] font-medium flex items-center gap-1"
               >
                 <CheckCheck className="w-3.5 h-3.5" />
                 Mark all read
@@ -85,16 +85,16 @@ export const NotificationBell: React.FC = () => {
                   key={n.id}
                   onClick={() => handleNotificationClick(n.id, n.link)}
                   className={`p-3.5 hover:bg-slate-50 transition-colors cursor-pointer flex items-start gap-3 ${
-                    !n.isRead ? 'bg-indigo-50/40' : ''
+                    !n.isRead ? 'bg-[#125b63]/5' : ''
                   }`}
                 >
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center justify-between gap-2">
-                      <p className={`text-xs font-semibold truncate ${!n.isRead ? 'text-indigo-950 font-bold' : 'text-slate-700'}`}>
+                      <p className={`text-xs font-semibold truncate ${!n.isRead ? 'text-[#125b63] font-bold' : 'text-slate-700'}`}>
                         {n.title}
                       </p>
                       {!n.isRead && (
-                        <span className="w-2 h-2 rounded-full bg-indigo-600 flex-shrink-0" />
+                        <span className="w-2 h-2 rounded-full bg-[#fd5800] flex-shrink-0" />
                       )}
                     </div>
                     <p className="text-xs text-slate-600 mt-0.5 line-clamp-2">
@@ -117,7 +117,7 @@ export const NotificationBell: React.FC = () => {
                 setIsOpen(false);
                 navigate('/notifications');
               }}
-              className="text-xs font-semibold text-indigo-600 hover:text-indigo-800"
+              className="text-xs font-semibold text-[#125b63] hover:text-[#063f4a]"
             >
               View all notifications &rarr;
             </button>

@@ -38,12 +38,12 @@ export const GitHubConnectPage: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 flex flex-col justify-between">
+    <div className="min-h-screen bg-[#f4f6f8] text-[#151717] flex flex-col justify-between selection:bg-[#fd5800] selection:text-white">
       <Navbar />
 
       <main className="flex-1 max-w-4xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-8">
         <div>
-          <h1 className="text-3xl font-extrabold text-slate-900 tracking-tight">
+          <h1 className="text-3xl font-extrabold text-[#151717] tracking-tight">
             GitHub Telemetry Integration
           </h1>
           <p className="text-sm text-slate-600 mt-1">
@@ -72,7 +72,7 @@ export const GitHubConnectPage: React.FC = () => {
 
         {/* State 1: Connected View */}
         {isConnected ? (
-          <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 sm:p-8 space-y-6">
+          <div className="bg-white rounded-2xl border border-slate-200/90 shadow-sm p-6 sm:p-8 space-y-6">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-100 pb-5">
               <div className="flex items-center gap-3.5">
                 <div className="w-12 h-12 rounded-2xl bg-emerald-100 text-emerald-700 flex items-center justify-center">
@@ -80,7 +80,7 @@ export const GitHubConnectPage: React.FC = () => {
                 </div>
                 <div>
                   <div className="flex items-center gap-2">
-                    <h3 className="text-lg font-bold text-slate-900">
+                    <h3 className="text-lg font-bold text-[#151717]">
                       GitHub Connected: {status?.username || 'Active Account'}
                     </h3>
                     <span className="px-2 py-0.5 text-xs font-bold bg-emerald-100 text-emerald-800 rounded-full">
@@ -99,7 +99,7 @@ export const GitHubConnectPage: React.FC = () => {
                 type="button"
                 disabled={syncing || loading}
                 onClick={handleSync}
-                className="inline-flex items-center gap-2 px-5 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl text-xs font-bold shadow-md shadow-indigo-100 transition-all disabled:opacity-50"
+                className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#fd5800] hover:bg-[#e04e00] text-white rounded-xl text-xs font-bold shadow-md transition-all disabled:opacity-50"
               >
                 <RefreshCw className={`w-4 h-4 ${syncing ? 'animate-spin' : ''}`} />
                 <span>{syncing ? 'Synchronizing Repos...' : 'Re-sync GitHub Repos'}</span>
@@ -167,7 +167,7 @@ export const GitHubConnectPage: React.FC = () => {
 
                 <div className="p-3 bg-slate-50 rounded-xl border border-slate-200">
                   <p className="font-bold text-slate-800 flex items-center gap-1.5 mb-1">
-                    <ShieldCheck className="w-3.5 h-3.5 text-indigo-600" />
+                    <ShieldCheck className="w-3.5 h-3.5 text-[#125b63]" />
                     Never Collected or Stored
                   </p>
                   <ul className="text-slate-600 space-y-1 list-disc pl-4 text-[11px]">
@@ -181,13 +181,13 @@ export const GitHubConnectPage: React.FC = () => {
 
             {/* Consent Checkboxes */}
             <div className="space-y-4 pt-2">
-              <div className="flex items-start gap-3 p-3.5 bg-indigo-50/50 rounded-xl border border-indigo-100 text-xs">
+              <div className="flex items-start gap-3 p-3.5 bg-[#125b63]/5 rounded-xl border border-[#125b63]/20 text-xs">
                 <input
                   type="checkbox"
                   id="consentPublic"
                   checked={true}
                   readOnly
-                  className="mt-0.5 text-indigo-600 rounded focus:ring-indigo-500"
+                  className="mt-0.5 text-[#125b63] rounded focus:ring-[#125b63]"
                 />
                 <label htmlFor="consentPublic" className="text-slate-700">
                   <strong className="text-slate-900 block mb-0.5">Public Repositories (Required for verification)</strong>

@@ -11,7 +11,6 @@ import { useReferrals } from '../hooks/useReferrals';
 import Navbar from '../components/Navbar';
 import ReferralCard from '../components/ReferralCard';
 import DisclaimerBanner from '../components/DisclaimerBanner';
-import PaletteBar from '../components/PaletteBar';
 
 export const ReferralsPage: React.FC = () => {
   const { user } = useAuth();
@@ -57,8 +56,6 @@ export const ReferralsPage: React.FC = () => {
       <Navbar />
 
       <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-6">
-        <PaletteBar />
-
         {/* Header Banner */}
         <div className="bg-gradient-to-r from-[#065861] via-[#125b63] to-[#151717] p-6 sm:p-8 rounded-3xl text-white shadow-lg flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>

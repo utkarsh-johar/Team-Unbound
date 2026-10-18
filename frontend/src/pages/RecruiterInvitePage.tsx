@@ -59,7 +59,7 @@ export const RecruiterInvitePage: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 flex flex-col justify-between">
+    <div className="min-h-screen bg-[#f4f6f8] text-[#151717] flex flex-col justify-between selection:bg-[#fd5800] selection:text-white">
       <Navbar />
 
       <main className="flex-1 max-w-xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-6">
@@ -70,7 +70,7 @@ export const RecruiterInvitePage: React.FC = () => {
 
         {loading ? (
           <div className="bg-white rounded-2xl border border-slate-200 p-12 text-center text-slate-500">
-            <Sparkles className="w-8 h-8 animate-spin mx-auto text-indigo-600 mb-2" />
+            <Sparkles className="w-8 h-8 animate-spin mx-auto text-[#125b63] mb-2" />
             <p className="text-sm font-semibold">Validating recruiter invitation token...</p>
           </div>
         ) : error ? (
@@ -92,10 +92,10 @@ export const RecruiterInvitePage: React.FC = () => {
         ) : (
           <div className="bg-white rounded-2xl border border-slate-200 shadow-xl p-8 sm:p-10 space-y-8">
             <div className="text-center space-y-2">
-              <div className="w-14 h-14 bg-indigo-50 border border-indigo-100 text-indigo-600 rounded-2xl flex items-center justify-center mx-auto shadow-sm">
+              <div className="w-14 h-14 bg-[#125b63]/10 border border-[#125b63]/20 text-[#125b63] rounded-2xl flex items-center justify-center mx-auto shadow-sm">
                 <Building2 className="w-7 h-7" />
               </div>
-              <h2 className="text-2xl font-extrabold text-slate-900 tracking-tight">
+              <h2 className="text-2xl font-extrabold text-[#151717] tracking-tight">
                 Recruiter Referral Invitation
               </h2>
               <p className="text-xs text-slate-500 max-w-xs mx-auto">
@@ -133,8 +133,8 @@ export const RecruiterInvitePage: React.FC = () => {
 
             {/* Authentication Guard */}
             {!user ? (
-              <div className="p-6 bg-indigo-50/50 rounded-2xl border border-indigo-100 text-center space-y-4">
-                <ShieldCheck className="w-8 h-8 text-indigo-600 mx-auto" />
+              <div className="p-6 bg-[#125b63]/5 rounded-2xl border border-[#125b63]/20 text-center space-y-4">
+                <ShieldCheck className="w-8 h-8 text-[#125b63] mx-auto" />
                 <div>
                   <h4 className="text-sm font-bold text-slate-900">Sign in to Claim Invitation</h4>
                   <p className="text-xs text-slate-600 mt-1">
@@ -144,7 +144,7 @@ export const RecruiterInvitePage: React.FC = () => {
                 <button
                   type="button"
                   onClick={login}
-                  className="w-full inline-flex items-center justify-center gap-2 px-5 py-3 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl text-xs font-bold shadow-md shadow-indigo-100 transition-all"
+                  className="w-full inline-flex items-center justify-center gap-2 px-5 py-3 bg-[#fd5800] hover:bg-[#e04e00] text-white rounded-xl text-xs font-bold shadow-md transition-all"
                 >
                   <span>Sign In with Google</span>
                   <ArrowRight className="w-4 h-4" />
@@ -160,7 +160,7 @@ export const RecruiterInvitePage: React.FC = () => {
                   type="button"
                   disabled={accepting}
                   onClick={handleAcceptInvite}
-                  className="w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-slate-900 hover:bg-indigo-600 text-white rounded-xl text-sm font-bold shadow-md transition-all disabled:opacity-50"
+                  className="w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-[#fd5800] hover:bg-[#e04e00] text-white rounded-xl text-sm font-bold shadow-md transition-all disabled:opacity-50"
                 >
                   {accepting ? (
                     <span>Activating Access...</span>

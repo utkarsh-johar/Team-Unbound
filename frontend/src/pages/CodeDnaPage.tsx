@@ -33,7 +33,7 @@ export const CodeDnaPage: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 flex flex-col justify-between">
+    <div className="min-h-screen bg-[#f4f6f8] text-[#151717] flex flex-col justify-between selection:bg-[#fd5800] selection:text-white">
       <Navbar />
 
       <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
@@ -41,23 +41,23 @@ export const CodeDnaPage: React.FC = () => {
         <div>
           <Link
             to="/dashboard"
-            className="inline-flex items-center gap-1.5 text-xs font-bold text-slate-500 hover:text-indigo-600 mb-3"
+            className="inline-flex items-center gap-1.5 text-xs font-bold text-slate-500 hover:text-[#125b63] mb-3"
           >
             <ArrowLeft className="w-4 h-4" />
             <span>Back to Dashboard</span>
           </Link>
 
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-sm">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white p-6 sm:p-8 rounded-2xl border border-slate-200/90 shadow-sm">
             <div>
               <div className="flex items-center gap-2">
-                <span className="text-xs font-bold uppercase tracking-wider text-indigo-600">
+                <span className="text-xs font-bold uppercase tracking-wider text-[#125b63]">
                   Telemetry Profiling
                 </span>
-                <span className="px-2 py-0.5 text-[10px] font-bold bg-indigo-100 text-indigo-700 rounded-full">
+                <span className="px-2 py-0.5 text-[10px] font-bold bg-[#125b63]/10 text-[#125b63] rounded-full border border-[#125b63]/20">
                   Deterministic Scoring
                 </span>
               </div>
-              <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight mt-1">
+              <h1 className="text-2xl sm:text-3xl font-extrabold text-[#151717] tracking-tight mt-1">
                 Your Code-DNA Skill Graph
               </h1>
               <p className="text-xs text-slate-500 mt-1 flex items-center gap-2">
@@ -79,7 +79,7 @@ export const CodeDnaPage: React.FC = () => {
                 type="button"
                 disabled={syncing || !isConnected}
                 onClick={handleSyncAndRefresh}
-                className="inline-flex items-center gap-2 px-5 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl text-xs font-bold shadow-md shadow-indigo-100 transition-all disabled:opacity-50"
+                className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#fd5800] hover:bg-[#e04e00] text-white rounded-xl text-xs font-bold shadow-md transition-all disabled:opacity-50"
               >
                 <RefreshCw className={`w-4 h-4 ${syncing ? 'animate-spin' : ''}`} />
                 <span>{syncing ? 'Recalculating Scores...' : 'Re-sync & Recalculate'}</span>
@@ -112,7 +112,7 @@ export const CodeDnaPage: React.FC = () => {
         {/* In-Depth Explanation Box */}
         <div className="bg-white rounded-2xl border border-slate-200 p-6 sm:p-7 space-y-4">
           <h3 className="text-sm font-bold text-slate-900 flex items-center gap-2">
-            <Sparkles className="w-4 h-4 text-indigo-600" />
+            <Sparkles className="w-4 h-4 text-[#125b63]" />
             How SkillBridge Formulates Your Code-DNA
           </h3>
           <p className="text-xs text-slate-600 leading-relaxed">
@@ -120,7 +120,7 @@ export const CodeDnaPage: React.FC = () => {
           </p>
           <div className="p-3 bg-slate-50 rounded-xl border border-slate-200 text-xs text-slate-500 flex items-center justify-between">
             <span>Need to add or modify indexed repositories?</span>
-            <Link to="/github/connect" className="text-indigo-600 font-bold hover:underline">
+            <Link to="/github/connect" className="text-[#125b63] font-bold hover:underline">
               Manage GitHub Ingestion &rarr;
             </Link>
           </div>

@@ -18,7 +18,6 @@ import { useReferrals } from '../hooks/useReferrals';
 import { useGitHub } from '../hooks/useGitHub';
 import Navbar from '../components/Navbar';
 import ReferralCard from '../components/ReferralCard';
-import PaletteBar from '../components/PaletteBar';
 import DisclaimerBanner from '../components/DisclaimerBanner';
 import DemoBadge from '../components/DemoBadge';
 
@@ -290,9 +289,6 @@ export const StudentDashboard: React.FC = () => {
             </div>
           </div>
         </div>
-
-        {/* Embedded Palette Bar Preview */}
-        <PaletteBar showLabels={true} />
 
         {/* Readiness Checklist Card */}
         <div className="bg-white rounded-3xl border border-slate-200 shadow-sm p-6 sm:p-7 space-y-4">
