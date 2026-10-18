@@ -7,6 +7,7 @@ const {
   CooldownState,
   User,
   Profile,
+  Institution,
   Consent,
   TechSkillScore,
   Notification,
@@ -466,12 +467,42 @@ const getReferralDetail = async (req, res) => {
   try {
     const { id } = req.params;
 
-    const referral = await Referral.findByPk(id);
+    const referral = await Referral.findByPk(id, {
+      include: [
+        { model: User, as: 'alumnus', attributes: ['id', 'name', 'email'] },
+        { model: Institution, as: 'institution', attributes: ['id', 'name'] }
+      ]
+    });
+
     if (!referral) {
       return res.status(404).json({ error: 'Referral not found' });
     }
 
     const refData = referral.toJSON ? referral.toJSON() : { ...referral };
+
+    // Normalize requiredTechnologies
+    if (typeof refData.requiredTechnologies === 'string') {
+      try {
+        refData.requiredTechnologies = JSON.parse(refData.requiredTechnologies);
+      } catch (e) {
+        refData.requiredTechnologies = refData.requiredTechnologies.split(',').map((s) => s.trim());
+      }
+    }
+    if (!Array.isArray(refData.requiredTechnologies)) {
+      refData.requiredTechnologies = [];
+    }
+
+    // Compute slots remaining
+    let selectedCount = 0;
+    if (ReferralCandidate) {
+      selectedCount = await ReferralCandidate.count({
+        where: {
+          referralId: referral.id,
+          status: { [Op.in]: ['referred', 'selected'] }
+        }
+      });
+    }
+    refData.slotsRemaining = Math.max(0, (refData.slots || 1) - selectedCount);
 
     const isOwner = refData.alumnusId === req.user.id;
     const isAdmin = req.user.role === 'admin';
@@ -528,6 +559,25 @@ const getReferralDetail = async (req, res) => {
     }
 
     if (req.user.role === 'student') {
+      // Find candidate's own standing if exists
+      if (ReferralCandidate) {
+        const myEntry = await ReferralCandidate.findOne({
+          where: {
+            referralId: referral.id,
+            candidateId: req.user.id
+          }
+        });
+        if (myEntry) {
+          refData.myMatch = {
+            rank: myEntry.rank,
+            matchScore: myEntry.matchScore,
+            status: myEntry.status,
+            codeDnaScore: myEntry.codeDnaScore,
+            sandboxScore: myEntry.sandboxScore,
+            fitScore: myEntry.fitScore
+          };
+        }
+      }
       delete refData.candidates;
       delete refData.recruiterEmail;
       return res.json({ referral: refData });

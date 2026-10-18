@@ -20,5 +20,6 @@ router.post('/:id/select', hasRole('alumni', 'admin'), referralController.select
 
 // POST /:id/generate-invite - generate recruiter invite link
 router.post('/:id/generate-invite', hasRole('alumni', 'admin'), referralController.generateInvite);
+router.post('/:id/invite', hasRole('alumni', 'admin'), referralController.generateInvite);
 
 module.exports = router;
