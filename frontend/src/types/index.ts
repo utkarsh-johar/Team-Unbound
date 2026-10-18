@@ -5,6 +5,15 @@ export interface Institution {
   createdAt?: string;
 }
 
+export interface ExperienceItem {
+  id?: string;
+  company: string;
+  role: string;
+  durationMonths: number;
+  description: string;
+  verificationLink?: string;
+}
+
 export interface Profile {
   id?: string;
   userId: string;
@@ -13,8 +22,9 @@ export interface Profile {
   branchProgram?: string;
   graduationYear?: number;
   cgpa?: number; // self-reported, not verified
-  careerIntent?: string[] | string;
+  careerIntent?: string[] | string | { targetRoles?: string[]; targetDomains?: string[]; workMode?: string };
   summary?: string;
+  experience?: ExperienceItem[];
   createdAt?: string;
   updatedAt?: string;
 }
@@ -90,6 +100,12 @@ export interface ReferralCandidate {
   codeDnaScore: number;
   sandboxScore: number; // Placeholder — 50 (Phase 1)
   fitScore: number;
+  experienceBonus?: number;
+  experienceSummary?: {
+    count: number;
+    totalMonths: number;
+    items: ExperienceItem[];
+  };
   status: 'ranked' | 'referred' | 'rejected' | 'selected';
   skippedReason?: string | null;
   createdAt?: string;
@@ -209,6 +225,12 @@ export interface RecruiterInvite {
 export interface CodeDnaData {
   skills: SkillEvidence[];
   scores: TechSkillScore[];
+  experience?: ExperienceItem[];
+  experienceSummary?: {
+    totalMonths: number;
+    count: number;
+    bonus: number;
+  };
   overallMeritScore?: {
     score: number;
     maxScore: number;
