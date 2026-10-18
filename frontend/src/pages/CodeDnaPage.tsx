@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Sparkles, RefreshCw, Calendar, ArrowLeft, CheckCircle2 } from 'lucide-react';
+import { Sparkles, RefreshCw, Calendar, ArrowLeft, CheckCircle2, Briefcase, Clock, ExternalLink } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useProfile } from '../hooks/useProfile';
 import { useGitHub } from '../hooks/useGitHub';
@@ -108,6 +108,79 @@ export const CodeDnaPage: React.FC = () => {
           subtitle="Score distribution derived from commit density, language volume, and framework manifests"
           showDisclaimer={false}
         />
+
+        {/* Real-world Industry Experience & Internships Section */}
+        <div className="bg-white rounded-2xl border border-slate-200 p-6 sm:p-7 space-y-4">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-100 pb-3">
+            <div>
+              <h3 className="text-sm font-bold text-slate-900 flex items-center gap-2">
+                <Briefcase className="w-4 h-4 text-[#125b63]" />
+                Industry Experience & Real-world Internships
+              </h3>
+              <p className="text-xs text-slate-500 mt-0.5">
+                Technical experience increases your referral placement ranking and fit scores
+              </p>
+            </div>
+            {(codeDna?.experienceSummary?.bonus ?? 0) > 0 ? (
+              <span className="self-start sm:self-auto px-3 py-1 text-xs font-bold bg-[#fd5800]/10 text-[#fd5800] rounded-full border border-[#fd5800]/25 flex items-center gap-1.5">
+                <Sparkles className="w-3.5 h-3.5" />
+                +{codeDna?.experienceSummary?.bonus} pts Experience Boost Active
+              </span>
+            ) : (
+              <Link
+                to="/profile"
+                className="self-start sm:self-auto px-3 py-1.5 text-xs font-bold text-[#125b63] bg-[#125b63]/10 hover:bg-[#125b63]/20 rounded-xl transition"
+              >
+                + Add Internship to Profile
+              </Link>
+            )}
+          </div>
+
+          {codeDna?.experience && codeDna.experience.length > 0 ? (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3.5 pt-1">
+              {codeDna.experience.map((exp, idx) => (
+                <div
+                  key={exp.id || idx}
+                  className="p-4 rounded-xl border border-slate-200 bg-slate-50/70 hover:border-[#125b63]/40 transition-all space-y-2"
+                >
+                  <div className="flex items-start justify-between gap-2">
+                    <div>
+                      <h4 className="text-sm font-bold text-slate-900">
+                        {exp.role} <span className="text-slate-400 font-normal">&bull;</span> <span className="text-[#125b63]">{exp.company}</span>
+                      </h4>
+                      <span className="inline-flex items-center gap-1 text-[11px] font-semibold text-slate-500 mt-0.5">
+                        <Clock className="w-3 h-3 text-slate-400" />
+                        {exp.durationMonths} months duration
+                      </span>
+                    </div>
+                  </div>
+
+                  {exp.description && (
+                    <p className="text-xs text-slate-600 leading-relaxed">{exp.description}</p>
+                  )}
+
+                  {exp.verificationLink && (
+                    <a
+                      href={exp.verificationLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1 text-xs font-semibold text-[#125b63] hover:underline pt-0.5"
+                    >
+                      <ExternalLink className="w-3 h-3" />
+                      View Artifact / PR / Repo Evidence
+                    </a>
+                  )}
+                </div>
+              ))}
+            </div>
+          ) : (
+            <div className="p-5 text-center bg-slate-50/60 rounded-xl border border-dashed border-slate-200">
+              <p className="text-xs text-slate-500">
+                No internships recorded yet. Add your past software engineering experience in your Profile to earn Fit Score increments.
+              </p>
+            </div>
+          )}
+        </div>
 
         {/* In-Depth Explanation Box */}
         <div className="bg-white rounded-2xl border border-slate-200 p-6 sm:p-7 space-y-4">

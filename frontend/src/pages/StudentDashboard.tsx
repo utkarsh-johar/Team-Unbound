@@ -11,6 +11,7 @@ import {
   Code2,
   ShieldCheck,
   ChevronRight,
+  Briefcase,
 } from 'lucide-react';
 import { useAuth } from '../hooks/useAuth';
 import { useProfile } from '../hooks/useProfile';
@@ -193,6 +194,17 @@ export const StudentDashboard: React.FC = () => {
                     {codeDna?.overallMeritScore?.components?.cgpaScore ?? 89.5} / 100
                   </span>
                 </div>
+                {(codeDna?.experienceSummary?.bonus ?? 0) > 0 && (
+                  <div className="flex items-center justify-between p-2.5 rounded-xl bg-[#fd5800]/20 border border-[#fd5800]/40">
+                    <span className="text-slate-100 flex items-center gap-1.5 font-medium">
+                      <Briefcase className="w-3.5 h-3.5 text-[#fd5800]" />
+                      Industry Experience
+                    </span>
+                    <span className="font-bold text-[#fd5800]">
+                      +{codeDna?.experienceSummary?.bonus} pts Boost ({codeDna?.experienceSummary?.totalMonths}m)
+                    </span>
+                  </div>
+                )}
               </div>
             </div>
 

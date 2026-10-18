@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Trophy, CheckCircle2, AlertTriangle, Sparkles, User, Info } from 'lucide-react';
+import { Trophy, CheckCircle2, AlertTriangle, Sparkles, User, Info, Briefcase } from 'lucide-react';
 import { ReferralCandidate } from '../types';
 
 interface CandidateRankListProps {
@@ -86,6 +86,13 @@ export const CandidateRankList: React.FC<CandidateRankListProps> = ({
             const isSelected = cand.status === 'referred' || cand.status === 'selected';
             const canSelect = isOpen && slotsRemaining > 0 && !isSelected && onSelectCandidate;
 
+            const expItems = cand.experienceSummary?.items ||
+              (Array.isArray((cand as any).profile?.experience) ? (cand as any).profile.experience : []);
+            const expCount = cand.experienceSummary?.count ?? expItems.length;
+            const expMonths = cand.experienceSummary?.totalMonths ??
+              expItems.reduce((acc: number, item: any) => acc + (parseInt(item.durationMonths, 10) || 0), 0);
+            const expBonus = cand.experienceBonus ?? (expCount > 0 ? Math.min(25, 10 + Math.floor(expMonths / 3) * 5) : 0);
+
             return (
               <div
                 key={cand.id}
@@ -119,6 +126,12 @@ export const CandidateRankList: React.FC<CandidateRankListProps> = ({
                           {cand.candidate?.name || (cand as any).user?.name || `Candidate ${cand.candidateId.slice(0, 6)}`}
                         </h4>
                         {getStatusBadge(cand.status)}
+                        {expCount > 0 && (
+                          <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md text-[10px] font-bold bg-[#125b63]/10 text-[#125b63] border border-[#125b63]/20">
+                            <Briefcase className="w-3 h-3" />
+                            {expCount} Internship{expCount === 1 ? '' : 's'} ({expMonths}m)
+                          </span>
+                        )}
                       </div>
                       <p className="text-xs text-slate-500 mt-0.5">
                         {cand.candidate?.profile?.branch ||
@@ -218,7 +231,14 @@ export const CandidateRankList: React.FC<CandidateRankListProps> = ({
                         style={{ width: `${cand.fitScore}%` }}
                       />
                     </div>
-                    <p className="text-[10px] text-slate-400 mt-1">Academic & intent alignment</p>
+                    {expBonus > 0 ? (
+                      <p className="text-[10px] text-[#fd5800] mt-1 font-bold flex items-center gap-1">
+                        <Sparkles className="w-2.5 h-2.5" />
+                        Includes +{expBonus} pts Exp Boost
+                      </p>
+                    ) : (
+                      <p className="text-[10px] text-slate-400 mt-1">Academic & intent alignment</p>
+                    )}
                   </div>
                 </div>
 

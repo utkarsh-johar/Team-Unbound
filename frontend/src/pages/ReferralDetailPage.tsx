@@ -350,7 +350,7 @@ export const ReferralDetailPage: React.FC = () => {
                 <div className="text-[11px] text-slate-500 space-y-1">
                   <p>&bull; <strong className="text-slate-800">CodeDNA (45%):</strong> Evaluated based on repository commit history, volume, and library evidence.</p>
                   <p>&bull; <strong className="text-slate-800">Sandbox (35%):</strong> Fixed baseline value (50/100) for Phase 1 MVP until Phase 2 interactive debugger launches.</p>
-                  <p>&bull; <strong className="text-slate-800">Fit (20%):</strong> Academic graduation year, branch relevance, and career domain intent.</p>
+                  <p>&bull; <strong className="text-slate-800">Fit (20%):</strong> Academic graduation year, branch relevance, career intent, and verified real-world internships / industry experience boost.</p>
                 </div>
               </div>
 
