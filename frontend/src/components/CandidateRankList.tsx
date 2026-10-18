@@ -5,14 +5,14 @@ import { ReferralCandidate } from '../types';
 interface CandidateRankListProps {
   candidates: ReferralCandidate[];
   onSelectCandidate?: (candidateId: string) => Promise<void>;
-  slotsRemaining: number;
+  slotsRemaining?: number;
   isOpen: boolean;
 }
 
 export const CandidateRankList: React.FC<CandidateRankListProps> = ({
   candidates = [],
   onSelectCandidate,
-  slotsRemaining,
+  slotsRemaining = 1,
   isOpen,
 }) => {
   const [selectingId, setSelectingId] = useState<string | null>(null);

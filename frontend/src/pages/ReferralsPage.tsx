@@ -52,25 +52,25 @@ export const ReferralsPage: React.FC = () => {
   });
 
   return (
-    <div className="min-h-screen bg-slate-50 flex flex-col justify-between">
+    <div className="min-h-screen bg-[#071519] text-slate-100 flex flex-col justify-between selection:bg-brand-500 selection:text-white">
       <Navbar />
 
       <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
         {/* Header Banner */}
-        <div className="bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div className="bg-[#0a1f24] p-6 sm:p-8 rounded-3xl border border-teal-900/60 shadow-xl flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
             <div className="flex items-center gap-2">
-              <span className="text-xs font-bold uppercase tracking-wider text-indigo-600">
+              <span className="text-xs font-bold uppercase tracking-wider text-brand-400">
                 Opportunities
               </span>
-              <span className="px-2 py-0.5 text-[10px] font-bold bg-indigo-100 text-indigo-700 rounded-full capitalize">
+              <span className="px-2 py-0.5 text-[10px] font-bold bg-teal-950 text-brand-300 border border-teal-800 rounded-full capitalize">
                 {user?.role} View
               </span>
             </div>
-            <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight mt-1">
+            <h1 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight mt-1">
               {isAlumni ? 'Your Posted Flash Referrals' : 'Active Flash Referrals'}
             </h1>
-            <p className="text-xs text-slate-500 mt-1 max-w-xl">
+            <p className="text-xs text-slate-400 mt-1 max-w-xl leading-relaxed">
               {isAlumni
                 ? 'Manage active slots, review candidate rankings, and generate invite links for hiring teams.'
                 : 'Browse verified alumni referral opportunities. Matching is determined by Code-DNA and Fit.'}
@@ -80,7 +80,7 @@ export const ReferralsPage: React.FC = () => {
           {isAlumni && user?.isVerified && (
             <Link
               to="/referrals/new"
-              className="inline-flex items-center gap-2 px-5 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl text-xs font-bold shadow-md shadow-indigo-100 transition-all self-start sm:self-auto"
+              className="inline-flex items-center gap-2 px-5 py-3 bg-copper-600 hover:bg-copper-500 text-white rounded-xl text-xs font-bold shadow-lg shadow-copper-900/40 transition-all self-start sm:self-auto"
             >
               <PlusCircle className="w-4 h-4" />
               <span>Post New Referral</span>
@@ -96,24 +96,26 @@ export const ReferralsPage: React.FC = () => {
         {/* Filter and Search Bar */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
           <div className="relative flex-1 max-w-md">
-            <Search className="w-4 h-4 text-slate-400 absolute left-3 top-3" />
+            <Search className="w-4 h-4 text-slate-500 absolute left-3.5 top-1/2 -translate-y-1/2" />
             <input
               type="text"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               placeholder="Search company, role title, or technology tag..."
-              className="w-full pl-9 pr-4 py-2 text-xs rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 bg-white"
+              className="w-full pl-10 pr-4 py-2.5 text-xs rounded-xl border border-teal-900/70 focus:outline-none focus:border-brand-400 bg-[#061013] text-white placeholder-slate-500 shadow-inner"
             />
           </div>
 
           <div className="flex items-center gap-2">
-            <Filter className="w-4 h-4 text-slate-400" />
-            <div className="flex items-center bg-white border border-slate-200 rounded-xl p-1 text-xs font-semibold">
+            <Filter className="w-4 h-4 text-slate-500" />
+            <div className="flex items-center bg-[#061013] border border-teal-900/70 rounded-xl p-1 text-xs font-semibold">
               <button
                 type="button"
                 onClick={() => setStatusFilter('all')}
-                className={`px-3 py-1 rounded-lg transition-colors ${
-                  statusFilter === 'all' ? 'bg-indigo-600 text-white' : 'text-slate-600 hover:text-slate-900'
+                className={`px-3 py-1.5 rounded-lg transition-all ${
+                  statusFilter === 'all'
+                    ? 'bg-teal-900/80 text-brand-300 shadow-sm font-bold'
+                    : 'text-slate-400 hover:text-white'
                 }`}
               >
                 All
@@ -121,8 +123,10 @@ export const ReferralsPage: React.FC = () => {
               <button
                 type="button"
                 onClick={() => setStatusFilter('open')}
-                className={`px-3 py-1 rounded-lg transition-colors ${
-                  statusFilter === 'open' ? 'bg-indigo-600 text-white' : 'text-slate-600 hover:text-slate-900'
+                className={`px-3 py-1.5 rounded-lg transition-all ${
+                  statusFilter === 'open'
+                    ? 'bg-teal-900/80 text-brand-300 shadow-sm font-bold'
+                    : 'text-slate-400 hover:text-white'
                 }`}
               >
                 Open Slots
@@ -130,8 +134,10 @@ export const ReferralsPage: React.FC = () => {
               <button
                 type="button"
                 onClick={() => setStatusFilter('expired')}
-                className={`px-3 py-1 rounded-lg transition-colors ${
-                  statusFilter === 'expired' ? 'bg-indigo-600 text-white' : 'text-slate-600 hover:text-slate-900'
+                className={`px-3 py-1.5 rounded-lg transition-all ${
+                  statusFilter === 'expired'
+                    ? 'bg-teal-900/80 text-brand-300 shadow-sm font-bold'
+                    : 'text-slate-400 hover:text-white'
                 }`}
               >
                 Expired
@@ -142,14 +148,15 @@ export const ReferralsPage: React.FC = () => {
 
         {/* Referrals Grid */}
         {loading ? (
-          <div className="py-16 text-center text-slate-500 bg-white rounded-2xl border border-slate-200">
-            <p className="text-sm font-semibold">Loading referrals...</p>
+          <div className="py-20 text-center bg-[#0a1f24] rounded-3xl border border-teal-900/50 shadow-xl space-y-3">
+            <div className="w-8 h-8 border-2 border-brand-400 border-t-transparent rounded-full animate-spin mx-auto" />
+            <p className="text-xs font-semibold text-slate-400">Loading referral opportunities...</p>
           </div>
         ) : filteredReferrals.length === 0 ? (
-          <div className="py-20 text-center text-slate-500 bg-white rounded-2xl border border-slate-200 p-8 space-y-3">
-            <Briefcase className="w-12 h-12 mx-auto text-slate-300" />
-            <h3 className="text-base font-bold text-slate-800">No Referrals Found</h3>
-            <p className="text-xs text-slate-500 max-w-sm mx-auto">
+          <div className="py-20 text-center bg-[#0a1f24] rounded-3xl border border-teal-900/50 p-8 space-y-3 shadow-xl">
+            <Briefcase className="w-12 h-12 mx-auto text-slate-600" />
+            <h3 className="text-base font-bold text-slate-200">No Referrals Found</h3>
+            <p className="text-xs text-slate-400 max-w-sm mx-auto">
               {searchTerm
                 ? 'Try broadening your search term or adjusting filter criteria.'
                 : 'There are currently no referrals matching your filter.'}
@@ -164,7 +171,7 @@ export const ReferralsPage: React.FC = () => {
         )}
       </main>
 
-      <footer className="py-6 text-center text-xs text-slate-400 border-t border-slate-200 bg-white">
+      <footer className="py-6 text-center text-xs text-slate-500 border-t border-teal-900/40 bg-[#061013]">
         SkillBridge Referral Directory &bull; Short-lived flash slots
       </footer>
     </div>
