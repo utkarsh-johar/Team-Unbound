@@ -179,6 +179,16 @@ async function seed() {
       },
       summary:
         'Passionate full-stack developer with experience building production Node.js microservices and interactive React web apps.',
+      experience: [
+        {
+          id: 'exp-demo-1',
+          company: 'Razorpay / Fintech Labs',
+          role: 'Backend Engineering Intern',
+          durationMonths: 6,
+          description: 'Engineered resilient webhook dispatchers with retry queues in Node.js and Redis, handling 5k events/sec.',
+          verificationLink: 'https://github.com/demo-student-1/webhook-engine',
+        },
+      ],
     },
     {
       userId: student2.id,
@@ -193,6 +203,16 @@ async function seed() {
       },
       summary:
         'Frontend-focused software engineer specializing in React, TypeScript, and modern component design systems.',
+      experience: [
+        {
+          id: 'exp-demo-2',
+          company: 'Acme SaaS Studio',
+          role: 'Frontend Developer Intern',
+          durationMonths: 4,
+          description: 'Constructed accessible component library in React & Tailwind CSS and reduced dashboard bundle size by 35%.',
+          verificationLink: 'https://github.com/demo-student-2/design-system',
+        },
+      ],
     },
     {
       userId: student3.id,
@@ -207,6 +227,16 @@ async function seed() {
       },
       summary:
         'Backend specialist with high-throughput API architecture experience in Python, FastAPI, and PostgreSQL optimization.',
+      experience: [
+        {
+          id: 'exp-demo-3',
+          company: 'ScaleCloud Networks',
+          role: 'Distributed Systems Intern',
+          durationMonths: 5,
+          description: 'Built distributed telemetry ingestion microservice in Python with async Kafka pipelines.',
+          verificationLink: 'https://github.com/demo-student-3/telemetry-pipeline',
+        },
+      ],
     },
   ]);
 
