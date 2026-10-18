@@ -110,23 +110,58 @@ const matchCandidates = async (referral) => {
     // 2. Sandbox score: Phase 1 fixed placeholder (50)
     const sandboxScore = appConfig.sandboxPlaceholder || 50;
 
-    // 3. Fit score from Profile fields (0-100)
+    // 3. Fit score from Profile fields (0-100) + Real-world Experience / Internship Increment
     let fitScore = 0;
     const currentYear = now.getFullYear();
     const gradYear = parseInt(profile.graduationYear, 10);
     if (!isNaN(gradYear) && gradYear >= currentYear && gradYear <= currentYear + 2) {
-      fitScore += 40;
+      fitScore += 30;
     } else if (!isNaN(gradYear)) {
-      fitScore += 20;
+      fitScore += 15;
     }
 
     if (profile.branchProgram && profile.branchProgram.trim().length > 0) {
-      fitScore += 30;
+      fitScore += 25;
     }
 
     if (profile.careerIntent) {
-      fitScore += 30;
+      fitScore += 20;
     }
+
+    // Real-world Industry Experience & Internships increment
+    let experienceList = [];
+    if (profile && profile.experience) {
+      try {
+        experienceList = Array.isArray(profile.experience)
+          ? profile.experience
+          : JSON.parse(profile.experience);
+      } catch (e) {
+        experienceList = [];
+      }
+    }
+
+    let experienceBonus = 0;
+    const totalExpMonths = experienceList.reduce((acc, exp) => acc + (parseInt(exp.durationMonths, 10) || 0), 0);
+    if (experienceList.length > 0) {
+      // Base points for verified internship/experience: +10 pts
+      experienceBonus += 10;
+      // Duration bonus: +5 pts per 3 months (up to 15 max)
+      const durationBonus = Math.min(15, Math.floor(totalExpMonths / 3) * 5);
+      experienceBonus += durationBonus;
+
+      // Tech match relevancy bonus in internship experience (+5 pts if matching required tech)
+      if (requiredTechs && requiredTechs.length > 0) {
+        const matchesTech = experienceList.some(exp => {
+          const content = `${exp.company || ''} ${exp.role || ''} ${exp.description || ''}`.toLowerCase();
+          return requiredTechs.some(rt => content.includes(rt));
+        });
+        if (matchesTech) {
+          experienceBonus += 5;
+        }
+      }
+    }
+    experienceBonus = Math.min(30, experienceBonus);
+    fitScore += experienceBonus;
     fitScore = Math.min(100, fitScore);
 
     // Weighted Match Score formula
@@ -143,6 +178,9 @@ const matchCandidates = async (referral) => {
       sandboxScore,
       fitScore,
       matchScore,
+      experienceBonus,
+      experienceMonths: totalExpMonths,
+      experienceCount: experienceList.length,
       student: studentData
     });
   }
@@ -529,13 +567,26 @@ const getReferralDetail = async (req, res) => {
           const candidateProfile = Profile
             ? await Profile.findOne({ where: { userId: candidateId } })
             : null;
-          const candidateScores = TechSkillScore
-            ? await TechSkillScore.findAll({ where: { userId: candidateId } })
-            : [];
+          let expList = [];
+          if (candidateProfile && candidateProfile.experience) {
+            try {
+              expList = Array.isArray(candidateProfile.experience)
+                ? candidateProfile.experience
+                : JSON.parse(candidateProfile.experience);
+            } catch (e) {
+              expList = [];
+            }
+          }
+          const totalMonths = expList.reduce((acc, exp) => acc + (parseInt(exp.durationMonths, 10) || 0), 0);
 
           cData.user = candidateUser;
           cData.profile = candidateProfile;
           cData.techScores = candidateScores;
+          cData.experienceSummary = {
+            count: expList.length,
+            totalMonths,
+            items: expList
+          };
           enriched.push(cData);
         }
         refData.candidates = enriched;

@@ -63,6 +63,7 @@ const updateProfile = async (req, res) => {
       cgpa,
       careerIntent,
       summary,
+      experience,
       optedInReferrals
     } = req.body;
 
@@ -86,7 +87,8 @@ const updateProfile = async (req, res) => {
       graduationYear: graduationYear !== undefined ? parseInt(graduationYear, 10) : profile?.graduationYear,
       cgpa: cgpa !== undefined ? parseFloat(cgpa) : profile?.cgpa,
       careerIntent: careerIntent !== undefined ? careerIntent : profile?.careerIntent,
-      summary: summary !== undefined ? summary : profile?.summary
+      summary: summary !== undefined ? summary : profile?.summary,
+      experience: experience !== undefined ? experience : profile?.experience
     };
 
     if (profile) {
@@ -204,6 +206,20 @@ const getCodeDna = async (req, res) => {
       normalizedCgpa = profile.cgpa <= 4.0 ? (profile.cgpa / 4.0) * 100 : (profile.cgpa / 10.0) * 100;
     }
 
+    // Experience boost computation
+    let experienceList = [];
+    if (profile && profile.experience) {
+      try {
+        experienceList = Array.isArray(profile.experience)
+          ? profile.experience
+          : JSON.parse(profile.experience);
+      } catch (e) {
+        experienceList = [];
+      }
+    }
+    const totalExpMonths = experienceList.reduce((acc, exp) => acc + (parseInt(exp.durationMonths, 10) || 0), 0);
+    const experienceBonus = Math.min(25, Math.floor(totalExpMonths / 3) * 5 + (totalExpMonths > 0 ? 5 : 0));
+
     const overallMeritScore = Math.round(
       (0.5 * avgSkillScore + 0.3 * bountyPlaceholder + 0.2 * normalizedCgpa) * 10
     ) / 10;
@@ -215,6 +231,12 @@ const getCodeDna = async (req, res) => {
       },
       skills: evidence,
       scores: enrichedScores,
+      experience: experienceList,
+      experienceSummary: {
+        totalMonths: totalExpMonths,
+        count: experienceList.length,
+        bonus: experienceBonus,
+      },
       overallMeritScore: {
         score: overallMeritScore,
         maxScore: 100,
