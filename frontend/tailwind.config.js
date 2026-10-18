@@ -49,6 +49,19 @@ export default {
           800: '#8d5535', // Swatch 9
           900: '#7c2d12',
         },
+        indigo: {
+          50: '#f0fdfc',
+          100: '#e0f2f1',
+          200: '#b2dfdb',
+          300: '#34807f', // Swatch 7
+          400: '#317c82', // Swatch 6
+          500: '#238480', // Swatch 3
+          600: '#125b63', // Swatch 2 (Deep Ocean Teal)
+          700: '#063f4a', // Swatch 5 (Deep Marine Teal)
+          800: '#155a5a', // Swatch 4 (Forest Teal)
+          900: '#151717', // Swatch 1 (Charcoal Black)
+          950: '#074041', // Swatch 8 (Deep Forest Pine)
+        },
       },
     },
   },
