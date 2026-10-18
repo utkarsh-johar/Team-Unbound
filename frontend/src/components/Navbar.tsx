@@ -53,8 +53,8 @@ export const Navbar: React.FC = () => {
     if (!user) {
       return [
         { label: 'How it Works', path: '/#how-it-works' },
-        { label: 'Verification', path: '/#verification' },
-        { label: 'Flash Referrals', path: '/#referrals' },
+        { label: 'Verified Skills', path: '/#verification' },
+        { label: 'Flash Referrals', path: '/referrals' },
       ];
     }
 
@@ -99,18 +99,18 @@ export const Navbar: React.FC = () => {
   const navLinks = getNavLinks();
 
   return (
-    <nav className="bg-[#0a191e]/95 backdrop-blur-md border-b border-teal-900/50 sticky top-0 z-40 text-slate-100">
+    <nav className="bg-[#151717] border-b border-[#125b63]/30 sticky top-0 z-40 text-slate-100 shadow-md">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16">
           {/* Logo and Brand */}
           <div className="flex items-center gap-3">
             <Link to="/" className="flex items-center gap-2.5 group">
-              <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-brand-600 to-copper-600 flex items-center justify-center text-white shadow-md shadow-teal-950 group-hover:scale-105 transition-transform">
-                <Sparkles className="w-5 h-5 text-white" />
+              <div className="w-8 h-8 rounded-full border-2 border-white flex items-center justify-center text-white transition-transform group-hover:scale-105">
+                <span className="w-3 h-3 rounded-full bg-[#fd5800]" />
               </div>
-              <div className="flex flex-col">
-                <span className="text-xl font-bold tracking-tight text-white group-hover:text-brand-300 transition-colors">
-                  Skill<span className="text-brand-400">Bridge</span>
+              <div className="flex items-center">
+                <span className="text-xl font-bold tracking-tight text-white">
+                  Skill<span className="text-[#238480]">Bridge</span>
                 </span>
               </div>
             </Link>
@@ -131,13 +131,13 @@ export const Navbar: React.FC = () => {
                 <Link
                   key={link.path}
                   to={link.path}
-                  className={`px-3 py-2 rounded-xl text-xs font-semibold transition-all flex items-center gap-1.5 ${
+                  className={`px-3.5 py-2 rounded-xl text-xs font-semibold transition-all flex items-center gap-1.5 ${
                     isActive
-                      ? 'bg-teal-950/80 text-brand-300 border border-teal-800/60 shadow-inner font-bold'
-                      : 'text-slate-300 hover:text-white hover:bg-teal-950/40'
+                      ? 'bg-[#125b63] text-white font-bold shadow-sm'
+                      : 'text-slate-300 hover:text-white hover:bg-white/5'
                   }`}
                 >
-                  {Icon && <Icon className="w-4 h-4 text-brand-400" />}
+                  {Icon && <Icon className="w-4 h-4 text-[#238480]" />}
                   {link.label}
                 </Link>
               );
@@ -150,23 +150,23 @@ export const Navbar: React.FC = () => {
               <>
                 <NotificationBell />
 
-                <div className="h-6 w-px bg-teal-900/50 mx-1" />
+                <div className="h-6 w-px bg-white/10 mx-1" />
 
-                {/* User Dropdown */}
+                {/* User Dropdown with Avatar */}
                 <div className="relative" ref={dropdownRef}>
                   <button
                     type="button"
                     onClick={() => setUserDropdownOpen((prev) => !prev)}
-                    className="flex items-center gap-2.5 p-1.5 pl-2.5 rounded-full hover:bg-teal-950/60 transition-colors border border-teal-900/40 hover:border-teal-700/60"
+                    className="flex items-center gap-2.5 p-1 pl-2.5 rounded-full hover:bg-white/5 transition-colors border border-transparent hover:border-white/10"
                   >
-                    <div className="w-8 h-8 rounded-full bg-teal-900/80 text-brand-300 flex items-center justify-center font-bold text-xs ring-1 ring-teal-700">
+                    <div className="w-8 h-8 rounded-full bg-[#f2521d] text-white flex items-center justify-center font-bold text-xs shadow-sm">
                       {user.name ? user.name.charAt(0).toUpperCase() : 'U'}
                     </div>
                     <div className="text-left hidden lg:block">
                       <p className="text-xs font-semibold text-white leading-tight truncate max-w-[120px]">
                         {user.name}
                       </p>
-                      <p className="text-[11px] text-brand-400 capitalize leading-tight">
+                      <p className="text-[11px] text-[#238480] capitalize leading-tight">
                         {user.role}
                       </p>
                     </div>
@@ -174,43 +174,48 @@ export const Navbar: React.FC = () => {
                   </button>
 
                   {userDropdownOpen && (
-                    <div className="origin-top-right absolute right-0 mt-2 w-60 rounded-2xl shadow-2xl bg-[#0a1f24] border border-teal-900/80 py-2 focus:outline-none z-50 text-slate-200">
-                      <div className="px-4 py-2.5 border-b border-teal-900/50">
-                        <p className="text-[10px] uppercase tracking-wider text-slate-400 font-bold">Signed in as</p>
-                        <p className="text-xs font-bold text-white truncate">
-                          {user.email}
-                        </p>
-                        {user.institution && (
-                          <p className="text-[11px] text-brand-400 font-medium mt-0.5 truncate">
-                            {user.institution.name}
+                    <div className="origin-top-right absolute right-0 mt-2 w-64 rounded-2xl shadow-2xl bg-white text-slate-800 border border-slate-200 py-2 focus:outline-none z-50">
+                      <div className="px-4 py-2.5 border-b border-slate-100 flex items-center gap-3">
+                        <div className="w-10 h-10 rounded-full bg-[#f2521d] text-white flex items-center justify-center font-bold text-sm flex-shrink-0">
+                          {user.name ? user.name.charAt(0).toUpperCase() : 'U'}
+                        </div>
+                        <div className="min-w-0">
+                          <p className="text-xs font-bold text-slate-900 truncate">
+                            {user.name || user.email}
                           </p>
-                        )}
+                          <p className="text-[11px] text-slate-500 truncate">
+                            {user.email}
+                          </p>
+                          <span className="inline-block mt-0.5 text-[10px] font-bold text-[#125b63] uppercase">
+                            {user.role}
+                          </span>
+                        </div>
                       </div>
 
                       <Link
                         to="/profile"
                         onClick={() => setUserDropdownOpen(false)}
-                        className="flex items-center gap-2.5 px-4 py-2 text-xs font-medium text-slate-300 hover:bg-teal-950/60 hover:text-white"
+                        className="flex items-center gap-2.5 px-4 py-2 text-xs font-semibold text-slate-700 hover:bg-slate-50 hover:text-[#125b63]"
                       >
-                        <UserIcon className="w-4 h-4 text-brand-400" />
+                        <UserIcon className="w-4 h-4 text-slate-400" />
                         My Profile & Settings
                       </Link>
 
                       <Link
                         to="/consent"
                         onClick={() => setUserDropdownOpen(false)}
-                        className="flex items-center gap-2.5 px-4 py-2 text-xs font-medium text-slate-300 hover:bg-teal-950/60 hover:text-white"
+                        className="flex items-center gap-2.5 px-4 py-2 text-xs font-semibold text-slate-700 hover:bg-slate-50 hover:text-[#125b63]"
                       >
-                        <ShieldCheck className="w-4 h-4 text-brand-400" />
+                        <ShieldCheck className="w-4 h-4 text-slate-400" />
                         Consent Settings
                       </Link>
 
-                      <div className="border-t border-teal-900/50 my-1.5" />
+                      <div className="border-t border-slate-100 my-1.5" />
 
                       {/* Quick Persona Switcher for Evaluation */}
                       <div className="px-4 py-2">
-                        <span className="text-[10px] font-bold uppercase tracking-wider text-teal-400/90">
-                          Switch Persona Role:
+                        <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400">
+                          Switch Role View:
                         </span>
                         <div className="grid grid-cols-2 gap-1.5 mt-2">
                           <button
@@ -220,7 +225,7 @@ export const Navbar: React.FC = () => {
                               await demoLogin('student');
                               window.location.href = '/dashboard/student';
                             }}
-                            className="px-2 py-1.5 text-[11px] font-semibold bg-[#061013] hover:bg-teal-950 text-brand-300 rounded-lg text-left transition border border-teal-900/60"
+                            className="px-2.5 py-1.5 text-[11px] font-bold bg-slate-50 hover:bg-[#125b63]/10 text-[#125b63] rounded-lg text-left transition border border-slate-200"
                           >
                             🎓 Student
                           </button>
@@ -231,7 +236,7 @@ export const Navbar: React.FC = () => {
                               await demoLogin('alumni');
                               window.location.href = '/dashboard/alumni';
                             }}
-                            className="px-2 py-1.5 text-[11px] font-semibold bg-[#061013] hover:bg-teal-950 text-emerald-300 rounded-lg text-left transition border border-teal-900/60"
+                            className="px-2.5 py-1.5 text-[11px] font-bold bg-slate-50 hover:bg-[#238480]/10 text-[#238480] rounded-lg text-left transition border border-slate-200"
                           >
                             🤝 Alumni
                           </button>
@@ -242,7 +247,7 @@ export const Navbar: React.FC = () => {
                               await demoLogin('recruiter');
                               window.location.href = '/dashboard/recruiter';
                             }}
-                            className="px-2 py-1.5 text-[11px] font-semibold bg-[#061013] hover:bg-teal-950 text-copper-300 rounded-lg text-left transition border border-teal-900/60"
+                            className="px-2.5 py-1.5 text-[11px] font-bold bg-slate-50 hover:bg-[#fd5800]/10 text-[#fd5800] rounded-lg text-left transition border border-slate-200"
                           >
                             💼 Recruiter
                           </button>
@@ -253,14 +258,14 @@ export const Navbar: React.FC = () => {
                               await demoLogin('admin');
                               window.location.href = '/dashboard/admin';
                             }}
-                            className="px-2 py-1.5 text-[11px] font-semibold bg-[#061013] hover:bg-teal-950 text-amber-300 rounded-lg text-left transition border border-teal-900/60"
+                            className="px-2.5 py-1.5 text-[11px] font-bold bg-slate-50 hover:bg-[#8d5535]/10 text-[#8d5535] rounded-lg text-left transition border border-slate-200"
                           >
                             🛡️ Admin
                           </button>
                         </div>
                       </div>
 
-                      <div className="border-t border-teal-900/50 my-1.5" />
+                      <div className="border-t border-slate-100 my-1.5" />
 
                       <button
                         type="button"
@@ -268,9 +273,9 @@ export const Navbar: React.FC = () => {
                           setUserDropdownOpen(false);
                           logout();
                         }}
-                        className="w-full text-left flex items-center gap-2.5 px-4 py-2 text-xs font-semibold text-rose-400 hover:bg-rose-950/40"
+                        className="w-full text-left flex items-center gap-2.5 px-4 py-2 text-xs font-semibold text-rose-600 hover:bg-rose-50"
                       >
-                        <LogOut className="w-4 h-4 text-rose-400" />
+                        <LogOut className="w-4 h-4 text-rose-500" />
                         Sign Out
                       </button>
                     </div>
@@ -283,13 +288,13 @@ export const Navbar: React.FC = () => {
                   to="/login"
                   className="px-3.5 py-2 text-xs font-semibold text-slate-300 hover:text-white transition-colors"
                 >
-                  Sign In
+                  Log in
                 </Link>
                 <Link
                   to="/login"
-                  className="px-4 py-2 text-xs font-bold text-white bg-copper-600 hover:bg-copper-500 rounded-xl shadow-lg shadow-copper-900/40 transition-all"
+                  className="px-4 py-2 text-xs font-bold text-white bg-[#fd5800] hover:bg-[#e04e00] rounded-xl shadow-md transition-all"
                 >
-                  Get Started
+                  Get started
                 </Link>
               </div>
             )}
@@ -301,7 +306,7 @@ export const Navbar: React.FC = () => {
             <button
               type="button"
               onClick={() => setMobileMenuOpen((prev) => !prev)}
-              className="p-2 rounded-xl text-slate-300 hover:text-white hover:bg-teal-950"
+              className="p-2 rounded-xl text-slate-300 hover:text-white hover:bg-white/10"
               aria-label="Toggle mobile menu"
             >
               {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -312,10 +317,10 @@ export const Navbar: React.FC = () => {
 
       {/* Mobile Drawer */}
       {mobileMenuOpen && (
-        <div className="md:hidden border-t border-teal-900/50 bg-[#0a1f24] px-4 pt-3 pb-6 space-y-3">
+        <div className="md:hidden border-t border-[#125b63]/30 bg-[#151717] px-4 pt-3 pb-6 space-y-3">
           {user && (
-            <div className="flex items-center gap-3 p-3 bg-[#061013] rounded-2xl border border-teal-900/60 mb-3">
-              <div className="w-10 h-10 rounded-full bg-teal-900 text-brand-300 flex items-center justify-center font-bold text-sm ring-1 ring-teal-700">
+            <div className="flex items-center gap-3 p-3 bg-white/5 rounded-2xl border border-white/10 mb-3">
+              <div className="w-10 h-10 rounded-full bg-[#f2521d] text-white flex items-center justify-center font-bold text-sm">
                 {user.name ? user.name.charAt(0).toUpperCase() : 'U'}
               </div>
               <div className="min-w-0 flex-1">
@@ -324,7 +329,7 @@ export const Navbar: React.FC = () => {
                   {user.isDemo && <DemoBadge size="sm" />}
                 </div>
                 <p className="text-xs text-slate-400 truncate">{user.email}</p>
-                <span className="inline-block mt-0.5 px-2 py-0.5 bg-teal-950 text-brand-300 border border-teal-800 rounded-md text-[10px] font-semibold uppercase">
+                <span className="inline-block mt-0.5 px-2 py-0.5 bg-[#125b63] text-white rounded-md text-[10px] font-semibold uppercase">
                   {user.role}
                 </span>
               </div>
@@ -341,11 +346,11 @@ export const Navbar: React.FC = () => {
                   to={link.path}
                   className={`flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-semibold ${
                     isActive
-                      ? 'bg-teal-950 text-brand-300 font-bold border border-teal-800'
-                      : 'text-slate-300 hover:bg-teal-950/60 hover:text-white'
+                      ? 'bg-[#125b63] text-white font-bold'
+                      : 'text-slate-300 hover:bg-white/5 hover:text-white'
                   }`}
                 >
-                  {Icon && <Icon className="w-4 h-4 text-brand-400" />}
+                  {Icon && <Icon className="w-4 h-4 text-[#238480]" />}
                   {link.label}
                 </Link>
               );
@@ -353,12 +358,12 @@ export const Navbar: React.FC = () => {
           </div>
 
           {user ? (
-            <div className="pt-3 border-t border-teal-900/50 space-y-1">
+            <div className="pt-3 border-t border-white/10 space-y-1">
               <Link
                 to="/profile"
-                className="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-medium text-slate-300 hover:bg-teal-950/60 hover:text-white"
+                className="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-medium text-slate-300 hover:bg-white/5 hover:text-white"
               >
-                <UserIcon className="w-4 h-4 text-brand-400" />
+                <UserIcon className="w-4 h-4 text-[#238480]" />
                 Profile Settings
               </Link>
               <button
@@ -371,18 +376,18 @@ export const Navbar: React.FC = () => {
               </button>
             </div>
           ) : (
-            <div className="pt-3 border-t border-teal-900/50 flex flex-col gap-2">
+            <div className="pt-3 border-t border-white/10 flex flex-col gap-2">
               <Link
                 to="/login"
-                className="w-full text-center py-2.5 text-xs font-semibold text-brand-300 bg-teal-950 rounded-xl border border-teal-800"
+                className="w-full text-center py-2.5 text-xs font-semibold text-white bg-white/10 rounded-xl"
               >
-                Sign In
+                Log in
               </Link>
               <Link
                 to="/login"
-                className="w-full text-center py-2.5 text-xs font-bold text-white bg-copper-600 rounded-xl shadow-lg shadow-copper-900/40"
+                className="w-full text-center py-2.5 text-xs font-bold text-white bg-[#fd5800] rounded-xl shadow-md"
               >
-                Get Started
+                Get started
               </Link>
             </div>
           )}

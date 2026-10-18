@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Sparkles, ArrowRight, Mail, User, School, AlertCircle } from 'lucide-react';
+import { ArrowRight, Mail, User, School, AlertCircle, Sparkles } from 'lucide-react';
 import { useAuth } from '../hooks/useAuth';
 import Navbar from '../components/Navbar';
+import PaletteBar from '../components/PaletteBar';
 import DisclaimerBanner from '../components/DisclaimerBanner';
 
 export const LoginPage: React.FC = () => {
@@ -54,51 +55,47 @@ export const LoginPage: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#071519] text-slate-100 flex flex-col justify-between selection:bg-brand-500 selection:text-white">
+    <div className="min-h-screen bg-[#f4f6f8] text-slate-900 flex flex-col justify-between selection:bg-[#238480] selection:text-white">
       <Navbar />
 
-      <main className="flex-1 flex items-center justify-center p-4 sm:p-6 lg:p-8 relative overflow-hidden">
-        {/* Ambient background glows inspired by Patch aesthetic */}
-        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-teal-500/10 rounded-full blur-3xl pointer-events-none" />
-        <div className="absolute bottom-10 right-10 w-72 h-72 bg-copper-600/10 rounded-full blur-3xl pointer-events-none" />
-
-        <div className="max-w-lg w-full space-y-6 relative z-10">
+      <main className="flex-1 flex items-center justify-center p-4 sm:p-6 lg:p-8">
+        <div className="max-w-md w-full space-y-6">
           {/* Concept Disclaimer */}
           <DisclaimerBanner
             message="SkillBridge MVP: Real email login enabled. Enter any valid email to persist your student, alumni, or recruiter credentials and track Code-DNA."
             variant="info"
           />
 
-          <div className="bg-[#0a1f24] rounded-3xl border border-teal-900/60 shadow-2xl p-8 sm:p-10 space-y-8 backdrop-blur-xl">
-            {/* Header */}
+          <div className="bg-white rounded-3xl border border-slate-200/90 shadow-xl p-8 sm:p-10 space-y-7">
+            {/* Header with Avatar Circle in exact #f2521d */}
             <div className="text-center space-y-2">
-              <div className="w-14 h-14 bg-gradient-to-br from-brand-600 to-copper-600 rounded-2xl flex items-center justify-center text-white mx-auto shadow-lg shadow-teal-950">
-                <Sparkles className="w-7 h-7" />
+              <div className="w-14 h-14 bg-[#f2521d] rounded-full flex items-center justify-center text-white mx-auto shadow-md font-bold text-xl">
+                {name ? name.charAt(0).toUpperCase() : <Sparkles className="w-6 h-6 text-white" />}
               </div>
-              <h2 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
-                Access SkillBridge
+              <h2 className="text-2xl font-extrabold text-slate-900 tracking-tight">
+                Welcome to SkillBridge
               </h2>
-              <p className="text-xs text-slate-400 max-w-sm mx-auto">
-                Sign in with your email or Google account to track Code-DNA scores and access verified referrals.
+              <p className="text-xs text-slate-500 max-w-xs mx-auto">
+                Sign in with your email address or Google account to track verified Code-DNA scores and referrals.
               </p>
             </div>
 
             {errorMsg && (
-              <div className="p-3 bg-rose-950/60 border border-rose-800 text-rose-300 text-xs font-semibold rounded-xl flex items-center gap-2">
-                <AlertCircle className="w-4 h-4 flex-shrink-0 text-rose-400" />
+              <div className="p-3 bg-rose-50 border border-rose-200 text-rose-700 text-xs font-semibold rounded-xl flex items-center gap-2">
+                <AlertCircle className="w-4 h-4 flex-shrink-0 text-rose-600" />
                 <span>{errorMsg}</span>
               </div>
             )}
 
             {/* Auth Mode Tabs */}
-            <div className="grid grid-cols-2 gap-1 p-1 bg-[#061013] rounded-2xl border border-teal-900/60 text-xs font-bold">
+            <div className="grid grid-cols-2 gap-1 p-1 bg-slate-100 rounded-2xl text-xs font-bold">
               <button
                 type="button"
                 onClick={() => setAuthMode('email')}
                 className={`py-2.5 rounded-xl transition-all ${
                   authMode === 'email'
-                    ? 'bg-teal-900/80 text-brand-300 shadow-sm'
-                    : 'text-slate-400 hover:text-white'
+                    ? 'bg-white text-[#125b63] shadow-sm font-black'
+                    : 'text-slate-500 hover:text-slate-900'
                 }`}
               >
                 Sign In With Email
@@ -108,8 +105,8 @@ export const LoginPage: React.FC = () => {
                 onClick={() => setAuthMode('google')}
                 className={`py-2.5 rounded-xl transition-all ${
                   authMode === 'google'
-                    ? 'bg-teal-900/80 text-brand-300 shadow-sm'
-                    : 'text-slate-400 hover:text-white'
+                    ? 'bg-white text-[#125b63] shadow-sm font-black'
+                    : 'text-slate-500 hover:text-slate-900'
                 }`}
               >
                 Google Workspace
@@ -120,47 +117,47 @@ export const LoginPage: React.FC = () => {
             {authMode === 'email' ? (
               <form onSubmit={handleEmailSubmit} className="space-y-4">
                 <div>
-                  <label className="block text-xs font-bold uppercase tracking-wider text-teal-400/90 mb-1.5">
+                  <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">
                     Your Email Address *
                   </label>
                   <div className="relative">
-                    <Mail className="w-4 h-4 text-slate-500 absolute left-3.5 top-1/2 -translate-y-1/2" />
+                    <Mail className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
                     <input
                       type="email"
                       required
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       placeholder="e.g. aryan@college.edu or aryan@gmail.com"
-                      className="w-full pl-10 pr-4 py-3 bg-[#061013] border border-teal-900/70 focus:border-brand-400 focus:ring-1 focus:ring-brand-400 rounded-xl text-xs text-white placeholder-slate-600 transition outline-none"
+                      className="w-full pl-10 pr-4 py-3 bg-white border border-slate-300 focus:border-[#125b63] focus:ring-1 focus:ring-[#125b63] rounded-xl text-xs text-slate-900 placeholder-slate-400 transition outline-none"
                     />
                   </div>
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   <div>
-                    <label className="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-1.5">
+                    <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">
                       Full Name
                     </label>
                     <div className="relative">
-                      <User className="w-4 h-4 text-slate-500 absolute left-3.5 top-1/2 -translate-y-1/2" />
+                      <User className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
                       <input
                         type="text"
                         value={name}
                         onChange={(e) => setName(e.target.value)}
                         placeholder="e.g. Aryan Singh"
-                        className="w-full pl-10 pr-4 py-3 bg-[#061013] border border-teal-900/70 focus:border-brand-400 rounded-xl text-xs text-white placeholder-slate-600 transition outline-none"
+                        className="w-full pl-10 pr-4 py-3 bg-white border border-slate-300 focus:border-[#125b63] rounded-xl text-xs text-slate-900 placeholder-slate-400 transition outline-none"
                       />
                     </div>
                   </div>
 
                   <div>
-                    <label className="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-1.5">
-                      Select Persona Role
+                    <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">
+                      Persona Role
                     </label>
                     <select
                       value={role}
                       onChange={(e) => setRole(e.target.value as any)}
-                      className="w-full px-3 py-3 bg-[#061013] border border-teal-900/70 focus:border-brand-400 rounded-xl text-xs text-white transition outline-none"
+                      className="w-full px-3 py-3 bg-white border border-slate-300 focus:border-[#125b63] rounded-xl text-xs text-slate-800 transition outline-none"
                     >
                       <option value="student">Student (Candidate)</option>
                       <option value="alumni">Alumni (Sponsor)</option>
@@ -171,17 +168,17 @@ export const LoginPage: React.FC = () => {
                 </div>
 
                 <div>
-                  <label className="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-1.5">
-                    Institution / University (Optional)
+                  <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">
+                    Institution / College (Optional)
                   </label>
                   <div className="relative">
-                    <School className="w-4 h-4 text-slate-500 absolute left-3.5 top-1/2 -translate-y-1/2" />
+                    <School className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
                     <input
                       type="text"
                       value={college}
                       onChange={(e) => setCollege(e.target.value)}
                       placeholder="e.g. Demo University or Tech Institute"
-                      className="w-full pl-10 pr-4 py-3 bg-[#061013] border border-teal-900/70 focus:border-brand-400 rounded-xl text-xs text-white placeholder-slate-600 transition outline-none"
+                      className="w-full pl-10 pr-4 py-3 bg-white border border-slate-300 focus:border-[#125b63] rounded-xl text-xs text-slate-900 placeholder-slate-400 transition outline-none"
                     />
                   </div>
                 </div>
@@ -189,10 +186,10 @@ export const LoginPage: React.FC = () => {
                 <button
                   type="submit"
                   disabled={submitting}
-                  className="w-full flex items-center justify-center gap-2 py-3.5 px-6 bg-copper-600 hover:bg-copper-500 text-white rounded-xl text-xs font-bold tracking-wide shadow-lg shadow-copper-900/50 hover:shadow-copper-800/60 transition-all group disabled:opacity-50"
+                  className="w-full flex items-center justify-center gap-2 py-3.5 px-6 bg-[#fd5800] hover:bg-[#e04e00] text-white rounded-xl text-xs font-bold tracking-wide shadow-md hover:shadow-lg transition-all group disabled:opacity-50"
                 >
                   {submitting ? (
-                    <span>Authenticating & Initializing Profile...</span>
+                    <span>Authenticating & Setting Up Profile...</span>
                   ) : (
                     <>
                       <span>Continue with Email</span>
@@ -206,7 +203,7 @@ export const LoginPage: React.FC = () => {
                 <button
                   type="button"
                   onClick={login}
-                  className="w-full flex items-center justify-center gap-3 px-5 py-3.5 bg-[#061013] border border-teal-900/80 hover:border-brand-400 rounded-xl font-bold text-xs text-slate-200 hover:text-white transition-all shadow-md group"
+                  className="w-full flex items-center justify-center gap-3 px-5 py-3.5 bg-white border border-slate-300 hover:border-slate-400 rounded-xl font-bold text-xs text-slate-700 shadow-sm hover:shadow transition-all group"
                 >
                   <svg className="w-5 h-5 flex-shrink-0" viewBox="0 0 24 24">
                     <path
@@ -226,58 +223,63 @@ export const LoginPage: React.FC = () => {
                       d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"
                     />
                   </svg>
-                  <span>Continue with Google OAuth</span>
-                  <ArrowRight className="w-4 h-4 text-slate-500 group-hover:translate-x-1 transition-transform ml-auto" />
+                  <span>Continue with Google</span>
+                  <ArrowRight className="w-4 h-4 text-slate-400 group-hover:translate-x-1 transition-transform ml-auto" />
                 </button>
-                <p className="text-[11px] text-slate-400 text-center leading-relaxed">
+                <p className="text-[11px] text-slate-500 text-center leading-relaxed">
                   Connects to institutional Google Workspace. If Google API keys are unconfigured locally, use the Email tab above.
                 </p>
               </div>
             )}
 
             {/* 1-Click Evaluation Personas */}
-            <div className="space-y-3 pt-4 border-t border-teal-900/50">
+            <div className="space-y-3 pt-3 border-t border-slate-100">
               <div className="flex items-center justify-between text-xs text-slate-400 font-semibold">
-                <span>Or Instant 1-Click Evaluation Accounts</span>
+                <span>Or 1-Click Evaluation Accounts</span>
               </div>
 
               <div className="grid grid-cols-2 gap-2">
                 <button
                   type="button"
                   onClick={() => demoLogin('student')}
-                  className="px-3.5 py-2.5 bg-[#061013] hover:bg-teal-950/80 text-brand-300 rounded-xl text-xs font-bold border border-teal-900/60 transition text-left"
+                  className="px-3 py-2 bg-slate-50 hover:bg-[#125b63]/10 text-[#125b63] rounded-xl text-xs font-bold border border-slate-200 transition text-left"
                 >
                   🎓 Demo Student
                 </button>
                 <button
                   type="button"
                   onClick={() => demoLogin('alumni')}
-                  className="px-3.5 py-2.5 bg-[#061013] hover:bg-teal-950/80 text-emerald-300 rounded-xl text-xs font-bold border border-teal-900/60 transition text-left"
+                  className="px-3 py-2 bg-slate-50 hover:bg-[#238480]/10 text-[#238480] rounded-xl text-xs font-bold border border-slate-200 transition text-left"
                 >
                   🤝 Demo Alumni
                 </button>
                 <button
                   type="button"
                   onClick={() => demoLogin('recruiter')}
-                  className="px-3.5 py-2.5 bg-[#061013] hover:bg-teal-950/80 text-copper-300 rounded-xl text-xs font-bold border border-teal-900/60 transition text-left"
+                  className="px-3 py-2 bg-slate-50 hover:bg-[#fd5800]/10 text-[#fd5800] rounded-xl text-xs font-bold border border-slate-200 transition text-left"
                 >
                   💼 Demo Recruiter
                 </button>
                 <button
                   type="button"
                   onClick={() => demoLogin('admin')}
-                  className="px-3.5 py-2.5 bg-[#061013] hover:bg-teal-950/80 text-amber-300 rounded-xl text-xs font-bold border border-teal-900/60 transition text-left"
+                  className="px-3 py-2 bg-slate-50 hover:bg-[#8d5535]/10 text-[#8d5535] rounded-xl text-xs font-bold border border-slate-200 transition text-left"
                 >
                   🛡️ Demo Admin
                 </button>
               </div>
             </div>
+
+            {/* Embedded Palette Bar */}
+            <div className="pt-2">
+              <PaletteBar showLabels={false} />
+            </div>
           </div>
         </div>
       </main>
 
-      <footer className="py-6 text-center text-xs text-slate-500 border-t border-teal-900/40 bg-[#061013]">
-        SkillBridge Platform &bull; Transforming verified developer commits into direct career referrals
+      <footer className="py-6 text-center text-xs text-slate-500 border-t border-slate-200 bg-white">
+        SkillBridge &bull; Transforming developer commits into career opportunity
       </footer>
     </div>
   );
