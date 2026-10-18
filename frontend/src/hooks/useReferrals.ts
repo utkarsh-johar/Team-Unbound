@@ -26,7 +26,7 @@ export const useReferrals = () => {
     }
   }, []);
 
-  const createReferral = async (data: Partial<Referral> & { recruiterEmail?: string }) => {
+  const createReferral = useCallback(async (data: Partial<Referral> & { recruiterEmail?: string }) => {
     setLoading(true);
     setError(null);
     try {
@@ -43,9 +43,9 @@ export const useReferrals = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, []);
 
-  const getReferralDetail = async (id: string): Promise<Referral> => {
+  const getReferralDetail = useCallback(async (id: string): Promise<Referral> => {
     setLoading(true);
     setError(null);
     try {
@@ -60,9 +60,9 @@ export const useReferrals = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, []);
 
-  const selectCandidate = async (referralId: string, candidateId: string) => {
+  const selectCandidate = useCallback(async (referralId: string, candidateId: string) => {
     setLoading(true);
     setError(null);
     try {
@@ -77,13 +77,13 @@ export const useReferrals = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, []);
 
-  const generateInvite = async (referralId: string): Promise<{ inviteUrl: string; token: string }> => {
+  const generateInvite = useCallback(async (referralId: string): Promise<{ inviteUrl: string; token: string }> => {
     setLoading(true);
     setError(null);
     try {
-      const response = await api.post(`/referrals/${referralId}/invite`);
+      const response = await api.post(`/referrals/${referralId}/generate-invite`);
       return response.data;
     } catch (err: unknown) {
       const msg = err && typeof err === 'object' && 'response' in err && (err as { response?: { data?: { message?: string } } }).response?.data?.message
@@ -94,7 +94,7 @@ export const useReferrals = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, []);
 
   return {
     referrals,

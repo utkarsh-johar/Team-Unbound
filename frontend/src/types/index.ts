@@ -104,11 +104,16 @@ export interface Referral {
     email: string;
     isDemo?: boolean;
   };
+  institutionId?: string;
+  institution?: {
+    id: string;
+    name: string;
+  };
   company: string;
   roleTitle: string;
   requiredTechnologies: string[];
   slots: number;
-  slotsRemaining: number;
+  slotsRemaining?: number;
   description: string;
   expiresAt: string;
   openToOtherColleges: boolean;
@@ -116,6 +121,14 @@ export interface Referral {
   status: 'open' | 'closed' | 'expired';
   isDemo?: boolean;
   candidates?: ReferralCandidate[];
+  myMatch?: {
+    rank: number;
+    matchScore: number;
+    status: string;
+    codeDnaScore: number;
+    sandboxScore: number;
+    fitScore: number;
+  };
   createdAt: string;
   updatedAt?: string;
 }

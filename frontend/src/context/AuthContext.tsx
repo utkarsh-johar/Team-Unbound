@@ -6,6 +6,7 @@ interface AuthContextType {
   user: User | null;
   loading: boolean;
   login: () => void;
+  loginWithEmail: (data: { email: string; name?: string; role?: string; college?: string; branch?: string; graduationYear?: number }) => Promise<User>;
   demoLogin: (role: string) => Promise<void>;
   logout: () => Promise<void>;
   selectRole: (role: string) => Promise<void>;
@@ -16,6 +17,7 @@ export const AuthContext = createContext<AuthContextType>({
   user: null,
   loading: true,
   login: () => {},
+  loginWithEmail: async () => { throw new Error('Not implemented'); },
   demoLogin: async () => {},
   logout: async () => {},
   selectRole: async () => {},
@@ -69,6 +71,25 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     }
   };
 
+  const loginWithEmail = async (data: {
+    email: string;
+    name?: string;
+    role?: string;
+    college?: string;
+    branch?: string;
+    graduationYear?: number;
+  }): Promise<User> => {
+    try {
+      setLoading(true);
+      const res = await api.post('/auth/email-login', data);
+      const authenticatedUser = res.data.user;
+      setUser(authenticatedUser);
+      return authenticatedUser;
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const logout = async () => {
     try {
       await api.post('/auth/logout');
@@ -105,6 +126,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         user,
         loading,
         login,
+        loginWithEmail,
         demoLogin,
         logout,
         selectRole,
